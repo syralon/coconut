@@ -1,0 +1,8 @@
+github.com/syralon/coconut v0.0.0-20251215103104-97451600931a h1:HGWo2PGXNNbaYLbDOTO5rgXEIQ0uK0yCwCb8Srren8M=
+github.com/syralon/coconut v0.0.0-20251215103104-97451600931a/go.mod h1:UGpqOmVa1CWVyDkFJaIWwbkbPQjciEi7sEHU1FjcekE=
+golang.org/x/sys v0.39.0 h1:CvCKL8MeisomCi6qNZ+wbb0DN9E5AATixKsvNtMoMFk=
+golang.org/x/sys v0.39.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
+google.golang.org/grpc v1.77.0 h1:wVVY6/8cGA6vvffn+wWK5ToddbgdU3d8MNENr4evgXM=
+google.golang.org/grpc v1.77.0/go.mod h1:z0BY1iVj0q8E1uSQCjL9cppRj+gnZjzDnzV0dHhrNig=
+google.golang.org/protobuf v1.36.10 h1:AYd7cD/uASjIL6Q9LiTjz8JLcrh/88q5UObnmY3aOOE=
+google.golang.org/protobuf v1.36.10/go.mod h1:HTf+CrKn2C3g5S8VImy6tdcUvCska2kB7j23XfzDpco=
