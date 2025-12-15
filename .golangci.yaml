@@ -1,0 +1,161 @@
+version: "2"
+run:
+  timeout: 5m
+
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - gci
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - localmodule
+      custom-order: true
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+
+linters:
+  default: none
+  enable:
+    - bodyclose
+    - dogsled
+    - containedctx
+    - depguard
+    - durationcheck
+    - errcheck
+    - err113
+    - errname
+    - fatcontext
+    - forbidigo
+    - goconst
+    - gocyclo
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - mnd
+    - nilnil
+    - prealloc
+    - revive
+    - staticcheck
+    - unconvert
+    - unused
+    - wastedassign
+    - protogetter
+    - whitespace
+    # Checks if all structure fields are initialized.
+    - exhaustruct
+    - bidichk
+    - errorlint
+    - exhaustive
+    - gosec
+    - nilerr
+    - nolintlint
+    - sqlclosecheck
+    - asasalint
+    - cyclop
+    - forcetypeassert
+    - gocognit
+    - makezero
+    - mirror
+    - noctx
+    - reassign
+    - unparam
+    - contextcheck
+    - dupl
+    - errchkjson
+    - gochecknoglobals
+    - gochecknoinits
+    - gocritic
+    - godox
+    - gomodguard
+    - usestdlibvars
+    - gocheckcompilerdirectives
+    - grouper
+    - importas
+    - loggercheck
+    - nakedret
+    - nosprintfhostport
+    - paralleltest
+    - thelper
+    - tparallel
+  settings:
+    exhaustive:
+      default-signifies-exhaustive: true
+    cyclop:
+      # The maximal code complexity to report.
+      # Default: 10
+      max-complexity: 20
+    gocyclo:
+      min-complexity: 20
+    lll:
+      line-length: 180
+    gosec:
+      excludes:
+        # int64->int32
+        - G115
+    misspell:
+      locale: US
+    mnd:
+      checks:
+        - argument
+        - case
+        - condition
+        - operation
+        - return
+      # 忽略以下数字
+      ignored-numbers:
+        - '0666'
+        - '0755'
+        - '0777'
+        - '0744'
+      ignored-functions:
+        - '^math\.'
+    depguard:
+      rules:
+        std:
+          list-mode: lax
+          deny:
+            - pkg: "golang.org/x/net/context"
+              desc: "use context in stdlib instead"
+            - pkg: "github.com/google/grpc"
+              desc: "use google.golang.org/grpc instead"
+    forbidigo:
+      forbid:
+        - pattern: ^((fmt|log)\\.Print(|f|ln)|print|println)$
+          msg: "use slog.Info instead of fmt.Print*/log.Print*"
+    staticcheck:
+      checks:
+        - all
+        # - "-SA5008" # Invalid struct tag
+    exhaustruct:
+      # include:
+      # exclude:
+      allow-empty: true
+
+
+  exclusions:
+    generated: lax
+    # https://golangci-lint.run/usage/false-positives/#exclusion-presets
+    presets:
+      - comments
+    #      - common-false-positives
+    #      - legacy
+    #      - std-error-handling
+    rules:
+      - path: (.+)_test\.go
+        linters:
+          - goconst
+          - dupl
+          - protogetter
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

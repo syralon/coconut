@@ -1,0 +1,9 @@
+grpc:
+  name: example.rpc
+  listen_on: 0.0.0.0:9000
+  timeout: 5s
+
+gateway:
+  name: example.gw
+  listen_on: 0.0.0.0:8000
+  timeout: 5s

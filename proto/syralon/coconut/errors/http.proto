@@ -1,0 +1,265 @@
+syntax = "proto3";
+
+package syralon.coconut.errors;
+
+import "google/protobuf/descriptor.proto";
+import "syralon/coconut/errors/errors.proto";
+
+option go_package = "github.com/syralon/coconut/proto/syralon/coconut/errors;errors";
+
+enum STATUS {
+  option (syralon.coconut.errors.as_error) = true;
+  option (syralon.coconut.errors.default_error) = {
+    status: 500
+    message: "Unknown Error"
+  };
+  UNSPECIFIED = 0;
+  CONTINUE = 100 [(syralon.coconut.errors.error) = {
+    status: 100
+    message: "Continue"
+  }]; // RFC 9110, 15.2.1
+  SWITCHING_PROTOCOLS = 101 [(syralon.coconut.errors.error) = {
+    status: 101
+    message: "Switching Protocols"
+  }]; // RFC 9110, 15.2.2
+  PROCESSING = 102 [(syralon.coconut.errors.error) = {
+    status: 102
+    message: "Processing"
+  }]; // RFC 2518, 10.1
+  EARLY_HINTS = 103 [(syralon.coconut.errors.error) = {
+    status: 103
+    message: "Early Hints"
+  }]; // RFC 8297
+  OK = 200 [(syralon.coconut.errors.error) = {
+    status: 200
+    message: "Ok"
+  }]; // RFC 9110, 15.3.1
+  CREATED = 201 [(syralon.coconut.errors.error) = {
+    status: 201
+    message: "Created"
+  }]; // RFC 9110, 15.3.2
+  ACCEPTED = 202 [(syralon.coconut.errors.error) = {
+    status: 202
+    message: "Accepted"
+  }]; // RFC 9110, 15.3.3
+  NON_AUTHORITATIVE_INFO = 203 [(syralon.coconut.errors.error) = {
+    status: 203
+    message: "Non Authoritative Info"
+  }]; // RFC 9110, 15.3.4
+  NO_CONTENT = 204 [(syralon.coconut.errors.error) = {
+    status: 204
+    message: "No Content"
+  }]; // RFC 9110, 15.3.5
+  RESET_CONTENT = 205 [(syralon.coconut.errors.error) = {
+    status: 205
+    message: "Reset Content"
+  }]; // RFC 9110, 15.3.6
+  PARTIAL_CONTENT = 206 [(syralon.coconut.errors.error) = {
+    status: 206
+    message: "Partial Content"
+  }]; // RFC 9110, 15.3.7
+  MULTI_STATUS = 207 [(syralon.coconut.errors.error) = {
+    status: 207
+    message: "Multi Status"
+  }]; // RFC 4918, 11.1
+  ALREADY_REPORTED = 208 [(syralon.coconut.errors.error) = {
+    status: 208
+    message: "Already Reported"
+  }]; // RFC 5842, 7.1
+  IMUSED = 226 [(syralon.coconut.errors.error) = {
+    status: 226
+    message: "Imused"
+  }]; // RFC 3229, 10.4.1
+  MULTIPLE_CHOICES = 300 [(syralon.coconut.errors.error) = {
+    status: 300
+    message: "Multiple Choices"
+  }]; // RFC 9110, 15.4.1
+  MOVED_PERMANENTLY = 301 [(syralon.coconut.errors.error) = {
+    status: 301
+    message: "Moved Permanently"
+  }]; // RFC 9110, 15.4.2
+  FOUND = 302 [(syralon.coconut.errors.error) = {
+    status: 302
+    message: "Found"
+  }]; // RFC 9110, 15.4.3
+  SEE_OTHER = 303 [(syralon.coconut.errors.error) = {
+    status: 303
+    message: "See Other"
+  }]; // RFC 9110, 15.4.4
+  NOT_MODIFIED = 304 [(syralon.coconut.errors.error) = {
+    status: 304
+    message: "Not Modified"
+  }]; // RFC 9110, 15.4.5
+  USE_PROXY = 305 [(syralon.coconut.errors.error) = {
+    status: 305
+    message: "Use Proxy"
+  }]; // RFC 9110, 15.4.6
+  TEMPORARY_REDIRECT = 307 [(syralon.coconut.errors.error) = {
+    status: 307
+    message: "Temporary Redirect"
+  }]; // RFC 9110, 15.4.8
+  PERMANENT_REDIRECT = 308 [(syralon.coconut.errors.error) = {
+    status: 308
+    message: "Permanent Redirect"
+  }]; // RFC 9110, 15.4.9
+  BAD_REQUEST = 400 [(syralon.coconut.errors.error) = {
+    status: 400
+    message: "Bad Request"
+  }]; // RFC 9110, 15.5.1
+  UNAUTHORIZED = 401 [(syralon.coconut.errors.error) = {
+    status: 401
+    message: "Unauthorized"
+  }]; // RFC 9110, 15.5.2
+  PAYMENT_REQUIRED = 402 [(syralon.coconut.errors.error) = {
+    status: 402
+    message: "Payment Required"
+  }]; // RFC 9110, 15.5.3
+  FORBIDDEN = 403 [(syralon.coconut.errors.error) = {
+    status: 403
+    message: "Forbidden"
+  }]; // RFC 9110, 15.5.4
+  NOT_FOUND = 404 [(syralon.coconut.errors.error) = {
+    status: 404
+    message: "Not Found"
+  }]; // RFC 9110, 15.5.5
+  METHOD_NOT_ALLOWED = 405 [(syralon.coconut.errors.error) = {
+    status: 405
+    message: "Method Not Allowed"
+  }]; // RFC 9110, 15.5.6
+  NOT_ACCEPTABLE = 406 [(syralon.coconut.errors.error) = {
+    status: 406
+    message: "Not Acceptable"
+  }]; // RFC 9110, 15.5.7
+  PROXY_AUTH_REQUIRED = 407 [(syralon.coconut.errors.error) = {
+    status: 407
+    message: "Proxy Auth Required"
+  }]; // RFC 9110, 15.5.8
+  REQUEST_TIMEOUT = 408 [(syralon.coconut.errors.error) = {
+    status: 408
+    message: "Request Timeout"
+  }]; // RFC 9110, 15.5.9
+  CONFLICT = 409 [(syralon.coconut.errors.error) = {
+    status: 409
+    message: "Conflict"
+  }]; // RFC 9110, 15.5.10
+  GONE = 410 [(syralon.coconut.errors.error) = {
+    status: 410
+    message: "Gone"
+  }]; // RFC 9110, 15.5.11
+  LENGTH_REQUIRED = 411 [(syralon.coconut.errors.error) = {
+    status: 411
+    message: "Length Required"
+  }]; // RFC 9110, 15.5.12
+  PRECONDITION_FAILED = 412 [(syralon.coconut.errors.error) = {
+    status: 412
+    message: "Precondition Failed"
+  }]; // RFC 9110, 15.5.13
+  REQUEST_ENTITY_TOO_LARGE = 413 [(syralon.coconut.errors.error) = {
+    status: 413
+    message: "Request Entity Too Large"
+  }]; // RFC 9110, 15.5.14
+  REQUEST_URITOO_LONG = 414 [(syralon.coconut.errors.error) = {
+    status: 414
+    message: "Request Uritoo Long"
+  }]; // RFC 9110, 15.5.15
+  UNSUPPORTED_MEDIA_TYPE = 415 [(syralon.coconut.errors.error) = {
+    status: 415
+    message: "Unsupported Media Type"
+  }]; // RFC 9110, 15.5.16
+  REQUESTED_RANGE_NOT_SATISFIABLE = 416 [(syralon.coconut.errors.error) = {
+    status: 416
+    message: "Requested Range Not Satisfiable"
+  }]; // RFC 9110, 15.5.17
+  EXPECTATION_FAILED = 417 [(syralon.coconut.errors.error) = {
+    status: 417
+    message: "Expectation Failed"
+  }]; // RFC 9110, 15.5.18
+  TEAPOT = 418 [(syralon.coconut.errors.error) = {
+    status: 418
+    message: "Teapot"
+  }]; // RFC 9110, 15.5.19 (Unused)
+  MISDIRECTED_REQUEST = 421 [(syralon.coconut.errors.error) = {
+    status: 421
+    message: "Misdirected Request"
+  }]; // RFC 9110, 15.5.20
+  UNPROCESSABLE_ENTITY = 422 [(syralon.coconut.errors.error) = {
+    status: 422
+    message: "Unprocessable Entity"
+  }]; // RFC 9110, 15.5.21
+  LOCKED = 423 [(syralon.coconut.errors.error) = {
+    status: 423
+    message: "Locked"
+  }]; // RFC 4918, 11.3
+  FAILED_DEPENDENCY = 424 [(syralon.coconut.errors.error) = {
+    status: 424
+    message: "Failed Dependency"
+  }]; // RFC 4918, 11.4
+  TOO_EARLY = 425 [(syralon.coconut.errors.error) = {
+    status: 425
+    message: "Too Early"
+  }]; // RFC 8470, 5.2.
+  UPGRADE_REQUIRED = 426 [(syralon.coconut.errors.error) = {
+    status: 426
+    message: "Upgrade Required"
+  }]; // RFC 9110, 15.5.22
+  PRECONDITION_REQUIRED = 428 [(syralon.coconut.errors.error) = {
+    status: 428
+    message: "Precondition Required"
+  }]; // RFC 6585, 3
+  TOO_MANY_REQUESTS = 429 [(syralon.coconut.errors.error) = {
+    status: 429
+    message: "Too Many Requests"
+  }]; // RFC 6585, 4
+  REQUEST_HEADER_FIELDS_TOO_LARGE = 431 [(syralon.coconut.errors.error) = {
+    status: 431
+    message: "Request Header Fields Too Large"
+  }]; // RFC 6585, 5
+  UNAVAILABLE_FOR_LEGAL_REASONS = 451 [(syralon.coconut.errors.error) = {
+    status: 451
+    message: "Unavailable For Legal Reasons"
+  }]; // RFC 7725, 3
+  INTERNAL_SERVER_ERROR = 500 [(syralon.coconut.errors.error) = {
+    status: 500
+    message: "Internal Server Error"
+  }]; // RFC 9110, 15.6.1
+  NOT_IMPLEMENTED = 501 [(syralon.coconut.errors.error) = {
+    status: 501
+    message: "Not Implemented"
+  }]; // RFC 9110, 15.6.2
+  BAD_GATEWAY = 502 [(syralon.coconut.errors.error) = {
+    status: 502
+    message: "Bad Gateway"
+  }]; // RFC 9110, 15.6.3
+  SERVICE_UNAVAILABLE = 503 [(syralon.coconut.errors.error) = {
+    status: 503
+    message: "Service Unavailable"
+  }]; // RFC 9110, 15.6.4
+  GATEWAY_TIMEOUT = 504 [(syralon.coconut.errors.error) = {
+    status: 504
+    message: "Gateway Timeout"
+  }]; // RFC 9110, 15.6.5
+  HTTPVERSION_NOT_SUPPORTED = 505 [(syralon.coconut.errors.error) = {
+    status: 505
+    message: "Httpversion Not Supported"
+  }]; // RFC 9110, 15.6.6
+  VARIANT_ALSO_NEGOTIATES = 506 [(syralon.coconut.errors.error) = {
+    status: 506
+    message: "Variant Also Negotiates"
+  }]; // RFC 2295, 8.1
+  INSUFFICIENT_STORAGE = 507 [(syralon.coconut.errors.error) = {
+    status: 507
+    message: "Insufficient Storage"
+  }]; // RFC 4918, 11.5
+  LOOP_DETECTED = 508 [(syralon.coconut.errors.error) = {
+    status: 508
+    message: "Loop Detected"
+  }]; // RFC 5842, 7.2
+  NOT_EXTENDED = 510 [(syralon.coconut.errors.error) = {
+    status: 510
+    message: "Not Extended"
+  }]; // RFC 2774, 7
+  NETWORK_AUTHENTICATION_REQUIRED = 511 [(syralon.coconut.errors.error) = {
+    status: 511
+    message: "Network Authentication Required"
+  }]; // RFC 6585, 6
+}
