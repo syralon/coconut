@@ -2,8 +2,8 @@ package common
 
 import (
 	"github.com/syralon/coconut/mesh"
-	"github.com/syralon/coconut/pkg/netutil"
-	"github.com/syralon/coconut/pkg/text"
+	"github.com/syralon/coconut/toolkit/netutil"
+	"github.com/syralon/coconut/toolkit/text"
 )
 
 type Config struct {

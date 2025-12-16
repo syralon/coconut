@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/syralon/coconut/pkg/netutil"
+	"github.com/syralon/coconut/toolkit/netutil"
 )
 
 type hostInfoHook struct {

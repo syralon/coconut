@@ -11,9 +11,15 @@ import (
 	"time"
 )
 
+type Content struct {
+	Key      string
+	Data     []byte
+	Metadata map[string]string
+}
+
 type Reader interface {
 	Read(ctx context.Context, key string) ([]byte, error)
-	Watch(ctx context.Context, key string) (<-chan []byte, error)
+	Watch(ctx context.Context, key string) (<-chan *Content, error)
 }
 
 type LocalFileReader struct {
@@ -35,13 +41,13 @@ func (r *LocalFileReader) Read(_ context.Context, key string) ([]byte, error) {
 	return data, nil
 }
 
-func (r *LocalFileReader) Watch(ctx context.Context, key string) (<-chan []byte, error) {
-	ch := make(chan []byte)
+func (r *LocalFileReader) Watch(ctx context.Context, key string) (<-chan *Content, error) {
+	ch := make(chan *Content)
 	go r.watch(ctx, filepath.Join(r.root, key), ch)
 	return ch, nil
 }
 
-func (r *LocalFileReader) watch(ctx context.Context, filename string, ch chan<- []byte) {
+func (r *LocalFileReader) watch(ctx context.Context, filename string, ch chan<- *Content) {
 	for {
 		select {
 		case <-ctx.Done():
@@ -55,7 +61,10 @@ func (r *LocalFileReader) watch(ctx context.Context, filename string, ch chan<- 
 				continue
 			}
 			r.sum = sum
-			ch <- data
+			ch <- &Content{
+				Key:  filename,
+				Data: data,
+			}
 		}
 	}
 }
