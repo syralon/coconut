@@ -6,9 +6,10 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/syralon/coconut/mesh"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/concurrency"
+
+	"github.com/syralon/coconut/mesh"
 )
 
 type ETCDElector struct {
@@ -32,7 +33,6 @@ func (e *ETCDElector) Start(ctx context.Context, name string, runner mesh.Electi
 }
 
 func (e *ETCDElector) Close() {
-
 }
 
 func (e *ETCDElector) campaign(ctx context.Context, name string, runner mesh.ElectionRunner) error {

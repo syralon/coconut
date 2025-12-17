@@ -4,9 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/syralon/coconut/mesh"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/naming/endpoints"
+
+	"github.com/syralon/coconut/mesh"
 )
 
 type Registry struct {

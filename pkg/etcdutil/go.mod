@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/syralon/coconut v0.0.0
+	github.com/syralon/coconut v0.0.0-20251217101102-b5d69a2f4a59
 	go.etcd.io/etcd/client/v3 v3.6.6
 	sigs.k8s.io/yaml v1.6.0
 )
@@ -28,5 +28,3 @@ require (
 	google.golang.org/grpc v1.77.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 )
-
-replace github.com/syralon/coconut v0.0.0 => ../../

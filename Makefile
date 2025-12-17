@@ -23,6 +23,23 @@ lint-fix:
 build:
 	go build -trimpath -ldflags "-s -w -X main.VERSION=$(rev)" ./cmd/...
 
+
+PKGS := $(shell find ./pkg -name go.mod -exec dirname {} \;)
+EXAMPLES := \
+	./example
+
+.PHONY: tidy
+tidy:
+	@go mod tidy;
+	@set -e; \
+	for dir in $(PKGS); do \
+		(cd $$dir && go get github.com/syralon/coconut@main && go mod tidy); \
+	done; \
+	for dir in $(EXAMPLES); do \
+		(cd $$dir && go get github.com/syralon/coconut@main && go mod tidy); \
+	done
+
+
 # show help
 help:
 	@echo ''

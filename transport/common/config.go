@@ -2,6 +2,7 @@ package common
 
 import (
 	"github.com/google/uuid"
+
 	"github.com/syralon/coconut/mesh"
 	"github.com/syralon/coconut/toolkit/netutil"
 	"github.com/syralon/coconut/toolkit/text"

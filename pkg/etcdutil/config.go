@@ -9,9 +9,10 @@ import (
 	"path"
 	"strings"
 
-	"github.com/syralon/coconut/configuration"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"sigs.k8s.io/yaml"
+
+	"github.com/syralon/coconut/configuration"
 )
 
 type Config struct {

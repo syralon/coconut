@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
-	github.com/syralon/coconut v0.0.0
+	github.com/syralon/coconut v0.0.0-20251217101102-b5d69a2f4a59
 	google.golang.org/grpc v1.77.0
 )
 
@@ -13,6 +13,7 @@ require (
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.64.0 // indirect
@@ -29,5 +30,3 @@ require (
 	google.golang.org/protobuf v1.36.10 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
-
-replace github.com/syralon/coconut v0.0.0 => ../
