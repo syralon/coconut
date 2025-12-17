@@ -29,6 +29,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a h1:/9rmTYQ/a+t0i8OYogN2l1lwpZVedGus2foyTBr+RaI=
 github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a/go.mod h1:EpXoscEWk7RI5Eef5PxzQTXKsOh9QteohtewfuVpdo0=
+github.com/syralon/snowflake v0.0.0-20251126030518-38724ee4d165 h1:pG2hMerS/fIBxUcQa0iCcnlxv4UEFBnNRkrMxV8+JdY=
+github.com/syralon/snowflake v0.0.0-20251126030518-38724ee4d165/go.mod h1:iFk18RJ+jodsmVSocTEZjdUW9zZpEMpjZmnlEjfN0LI=
 go.opentelemetry.io/auto/sdk v1.2.1 h1:jXsnJ4Lmnqd11kwkBV2LgLoFMZKizbCi5fNZ/ipaZ64=
 go.opentelemetry.io/auto/sdk v1.2.1/go.mod h1:KRTj+aOaElaLi+wW1kO/DZRXwkF4C5xPbEe3ZiIhN7Y=
 go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.64.0 h1:RN3ifU8y4prNWeEnQp2kRRHz8UwonAEYZl8tUzHEXAk=

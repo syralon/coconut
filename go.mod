@@ -8,6 +8,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
 	github.com/stretchr/testify v1.11.1
 	github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a
+	github.com/syralon/snowflake v0.0.0-20251126030518-38724ee4d165
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.64.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.64.0
 	go.opentelemetry.io/otel v1.39.0

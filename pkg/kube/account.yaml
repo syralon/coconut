@@ -1,0 +1,32 @@
+# --- ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: election-example-sa
+  namespace: develop
+---
+# --- Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: leader-election-role
+  namespace: develop
+rules:
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "watch", "list", "create", "update", "patch"]
+---
+# --- RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: leader-election-binding
+  namespace: develop
+subjects:
+  - kind: ServiceAccount
+    name: election-example-sa
+    namespace: develop
+roleRef:
+  kind: Role
+  name: leader-election-role
+  apiGroup: rbac.authorization.k8s.io

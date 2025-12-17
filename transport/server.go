@@ -9,6 +9,9 @@ import (
 type Server interface {
 	Serve(ctx context.Context) error
 	Shutdown(ctx context.Context) error
+}
+
+type EndpointServer interface {
 	Endpoint() *mesh.Endpoint
 }
 

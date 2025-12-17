@@ -17,7 +17,11 @@ type serverRegistry struct {
 }
 
 func (s *serverRegistry) Serve(ctx context.Context) (err error) {
-	s.endpoint = s.Endpoint()
+	if ed, ok := s.Server.(EndpointServer); !ok {
+		return s.Server.Serve(ctx)
+	} else {
+		s.endpoint = ed.Endpoint()
+	}
 	if s.receipt, err = s.registry.Register(ctx, s.endpoint); err != nil {
 		return err
 	}
@@ -26,6 +30,9 @@ func (s *serverRegistry) Serve(ctx context.Context) (err error) {
 }
 
 func (s *serverRegistry) Shutdown(ctx context.Context) error {
+	if s.endpoint == nil {
+		return s.Server.Shutdown(ctx)
+	}
 	err := s.registry.Deregister(ctx, s.endpoint)
 	return errors.Join(err, s.Server.Shutdown(ctx))
 }

@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
-	github.com/syralon/coconut v0.0.0-20251215103314-c5c5d8bc61f1
+	github.com/syralon/coconut v0.0.0
 	google.golang.org/grpc v1.77.0
 )
 
@@ -29,3 +29,5 @@ require (
 	google.golang.org/protobuf v1.36.10 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
+
+replace github.com/syralon/coconut v0.0.0 => ../

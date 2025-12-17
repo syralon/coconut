@@ -1,6 +1,7 @@
 package common
 
 import (
+	"github.com/google/uuid"
 	"github.com/syralon/coconut/mesh"
 	"github.com/syralon/coconut/toolkit/netutil"
 	"github.com/syralon/coconut/toolkit/text"
@@ -25,6 +26,7 @@ type TLSConfig struct {
 func (c *Config) Endpoint() *mesh.Endpoint {
 	ip, port := netutil.FingerOut(c.ListenOn, true)
 	endpoint := &mesh.Endpoint{
+		ID:   uuid.New().String(),
 		Name: c.Name,
 		Host: ip,
 		Port: uint16(port),

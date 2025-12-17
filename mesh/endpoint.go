@@ -29,6 +29,7 @@ type Endpoint struct {
 	Metadata Metadata
 	State    State
 	Scheme   Scheme
+	ID       string
 }
 
 func (e Endpoint) Address() string {

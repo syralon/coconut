@@ -13,13 +13,17 @@ type serverLogger struct {
 }
 
 func (s *serverLogger) Serve(ctx context.Context) (err error) {
-	s.endpoint = s.Endpoint()
-	slog.InfoContext(ctx, "service started", "name", s.endpoint.Name, "endpoint", s.endpoint.Address())
+	if ed, ok := s.Server.(EndpointServer); ok {
+		s.endpoint = ed.Endpoint()
+		slog.InfoContext(ctx, "service started", "name", s.endpoint.Name, "endpoint", s.endpoint.Address())
+	}
 	return s.Server.Serve(ctx)
 }
 
 func (s *serverLogger) Shutdown(ctx context.Context) error {
-	defer slog.InfoContext(ctx, "service stopped", "name", s.endpoint.Name, "endpoint", s.endpoint.Address())
+	if s.endpoint != nil {
+		defer slog.InfoContext(ctx, "service stopped", "name", s.endpoint.Name, "endpoint", s.endpoint.Address())
+	}
 	return s.Server.Shutdown(ctx)
 }
 
