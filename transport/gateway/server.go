@@ -103,10 +103,14 @@ func (s *Server) Serve(ctx context.Context) error {
 	return s.srv.ListenAndServe()
 }
 
+func (s *Server) Name() string {
+	return "gateway"
+}
+
 func (s *Server) Shutdown(ctx context.Context) error {
 	return s.srv.Shutdown(ctx)
 }
 
-func (s *Server) Endpoint() *mesh.Endpoint {
-	return s.endpoint
+func (s *Server) Endpoint() (*mesh.Endpoint, bool) {
+	return s.endpoint, true
 }

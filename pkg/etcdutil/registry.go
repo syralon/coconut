@@ -30,7 +30,7 @@ func (r *Registry) Register(ctx context.Context, endpoint *mesh.Endpoint) (*mesh
 	if _, err = r.client.KeepAlive(ctx, lease.ID); err != nil {
 		return nil, err
 	}
-	id := fmt.Sprintf("%s_%s", endpoint.Scheme, endpoint.Name)
+	id := fmt.Sprintf("%s/%s_%s", endpoint.Name, endpoint.Scheme, endpoint.ID)
 	if err = em.AddEndpoint(ctx, id, endpoints.Endpoint{
 		Addr:     endpoint.Address(),
 		Metadata: endpoint.Metadata,
@@ -45,6 +45,6 @@ func (r *Registry) Deregister(ctx context.Context, endpoint *mesh.Endpoint) erro
 	if err != nil {
 		return err
 	}
-	id := fmt.Sprintf("%s_%s", endpoint.Scheme, endpoint.Name)
+	id := fmt.Sprintf("%s/%s_%s", endpoint.Name, endpoint.Scheme, endpoint.ID)
 	return em.DeleteEndpoint(ctx, id)
 }

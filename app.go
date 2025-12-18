@@ -75,7 +75,7 @@ func (a *App) serves(ctx context.Context) error {
 		go func() {
 			err := s.Serve(ctx)
 			if err != nil {
-				slog.ErrorContext(ctx, "service exited with error", slog.String("error", err.Error()), slog.String("service", server.Endpoint().Name))
+				slog.ErrorContext(ctx, err.Error())
 				select {
 				case ech <- err:
 				default:

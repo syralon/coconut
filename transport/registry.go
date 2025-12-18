@@ -10,19 +10,15 @@ import (
 
 type serverRegistry struct {
 	Server
-
 	registry mesh.Registry
-	receipt  *mesh.Receipt
 	endpoint *mesh.Endpoint
 }
 
 func (s *serverRegistry) Serve(ctx context.Context) (err error) {
-	if ed, ok := s.Server.(EndpointServer); !ok {
+	if s.endpoint == nil {
 		return s.Server.Serve(ctx)
-	} else {
-		s.endpoint = ed.Endpoint()
 	}
-	if s.receipt, err = s.registry.Register(ctx, s.endpoint); err != nil {
+	if _, err = s.registry.Register(ctx, s.endpoint); err != nil {
 		return err
 	}
 	slog.InfoContext(ctx, "service registered", "name", s.endpoint.Name, "address", s.endpoint.Address())
@@ -39,9 +35,11 @@ func (s *serverRegistry) Shutdown(ctx context.Context) error {
 
 func Registry(registry mesh.Registry) ServerHook {
 	return func(server Server) Server {
+		endpoint, _ := server.Endpoint()
 		return &serverRegistry{
 			Server:   server,
 			registry: registry,
+			endpoint: endpoint,
 		}
 	}
 }

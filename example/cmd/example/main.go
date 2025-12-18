@@ -6,17 +6,18 @@ import (
 	"os"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	stdgrpc "google.golang.org/grpc"
-
 	"github.com/syralon/coconut"
 	"github.com/syralon/coconut/configuration"
 	"github.com/syralon/coconut/example/internal/config"
+	"github.com/syralon/coconut/example/internal/global/snowflake"
 	"github.com/syralon/coconut/logs"
+	"github.com/syralon/coconut/pkg/etcdutil"
 	"github.com/syralon/coconut/transport"
 	"github.com/syralon/coconut/transport/gateway"
 	"github.com/syralon/coconut/transport/gateway/middleware"
 	"github.com/syralon/coconut/transport/grpc"
 	"github.com/syralon/coconut/transport/grpc/interceptor"
+	stdgrpc "google.golang.org/grpc"
 )
 
 func init() {
@@ -35,7 +36,30 @@ func main() {
 		panic(err)
 	}
 
-	app := coconut.NewApp(coconut.WithHooks(transport.Logger()))
+	client, err := c.ETCD.NewClient()
+	if err != nil {
+		panic(err)
+	}
+
+	roulette := etcdutil.NewRoulette("example", client)
+	id, err := roulette.Allocate(ctx)
+	if err != nil {
+		panic(err)
+	}
+	if err = snowflake.Setup(id); err != nil {
+		panic(err)
+	}
+
+	app := coconut.NewApp(
+		coconut.WithHooks(
+			transport.Logger(),
+			transport.Registry(etcdutil.NewRegistry(client)),
+		),
+		coconut.WithReleaser(
+			coconut.ReleaserFunc(roulette.Release),
+		),
+	)
+
 	srv1 := gateway.NewServer(&c.Gateway)
 	srv1.WithOptions(
 		runtime.WithMiddlewares(

@@ -36,6 +36,10 @@ func NewServer(c *Config) *Server {
 	return s
 }
 
+func (s *Server) Name() string {
+	return "grpc"
+}
+
 func (s *Server) Serve(_ context.Context) error {
 	options := []grpc.ServerOption{
 		grpc.ChainUnaryInterceptor(s.unaryInterceptors...),
@@ -57,12 +61,14 @@ func (s *Server) Serve(_ context.Context) error {
 }
 
 func (s *Server) Shutdown(_ context.Context) error {
-	s.srv.GracefulStop()
+	if s.srv != nil {
+		s.srv.GracefulStop()
+	}
 	return nil
 }
 
-func (s *Server) Endpoint() *mesh.Endpoint {
-	return s.endpoint
+func (s *Server) Endpoint() (*mesh.Endpoint, bool) {
+	return s.endpoint, true
 }
 
 func (s *Server) Register(registers ...RegisterFunc) *Server {

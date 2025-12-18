@@ -1,9 +1,14 @@
 grpc:
-  name: example.rpc
+  name: example/grpc
   listen_on: 0.0.0.0:9000
   timeout: 5s
 
 gateway:
-  name: example.gw
+  name: example/gateway
   listen_on: 0.0.0.0:8000
   timeout: 5s
+
+
+etcd:
+  endpoints:
+    - 127.0.0.1:32379

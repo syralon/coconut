@@ -2,28 +2,21 @@ package transport
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
-
-	"github.com/syralon/coconut/mesh"
 )
 
 type serverLogger struct {
 	Server
-	endpoint *mesh.Endpoint
 }
 
 func (s *serverLogger) Serve(ctx context.Context) (err error) {
-	if ed, ok := s.Server.(EndpointServer); ok {
-		s.endpoint = ed.Endpoint()
-		slog.InfoContext(ctx, "service started", "name", s.endpoint.Name, "endpoint", s.endpoint.Address())
-	}
+	slog.InfoContext(ctx, fmt.Sprintf("%s server started", s.Name()))
 	return s.Server.Serve(ctx)
 }
 
 func (s *serverLogger) Shutdown(ctx context.Context) error {
-	if s.endpoint != nil {
-		defer slog.InfoContext(ctx, "service stopped", "name", s.endpoint.Name, "endpoint", s.endpoint.Address())
-	}
+	slog.InfoContext(ctx, fmt.Sprintf("%s server stopped", s.Name()))
 	return s.Server.Shutdown(ctx)
 }
 

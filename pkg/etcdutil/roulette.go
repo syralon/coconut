@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/google/uuid"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
@@ -46,10 +47,10 @@ func (r *Roulette) Allocate(ctx context.Context) (int, error) {
 		return 0, err
 	}
 	for i := 1; i <= r.maxID; i++ {
-		key := fmt.Sprintf("/%s/workers/%d", r.name, i)
+		key := fmt.Sprintf("%s/workers/%d", r.name, i)
 		txn := r.client.Txn(ctx).
 			If(clientv3.Compare(clientv3.CreateRevision(key), "=", 0)). //
-			Then(clientv3.OpPut(key, "1", clientv3.WithLease(lease.ID)))
+			Then(clientv3.OpPut(key, uuid.New().String(), clientv3.WithLease(lease.ID)))
 		resp, err := txn.Commit()
 		if err != nil {
 			return 0, err

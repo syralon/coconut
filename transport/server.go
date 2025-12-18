@@ -9,11 +9,13 @@ import (
 type Server interface {
 	Serve(ctx context.Context) error
 	Shutdown(ctx context.Context) error
+	Name() string
+	Endpoint() (*mesh.Endpoint, bool)
 }
 
-type EndpointServer interface {
-	Endpoint() *mesh.Endpoint
-}
+//type EndpointServer interface {
+//	Endpoint() *mesh.Endpoint
+//}
 
 type ServerHook func(server Server) Server
 
