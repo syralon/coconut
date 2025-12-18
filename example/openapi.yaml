@@ -1,0 +1,399 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /api/books:
+        get:
+            tags:
+                - BookService
+            description: List books
+            operationId: BookService_List
+            parameters:
+                - name: paginator.classical.page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.classical.limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.classical.total
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.classical.next
+                  in: query
+                  schema:
+                    type: boolean
+                - name: paginator.classical.order.by
+                  in: query
+                  schema:
+                    type: string
+                - name: paginator.classical.order.desc
+                  in: query
+                  schema:
+                    type: boolean
+                - name: paginator.infinite.sequence
+                  in: query
+                  schema:
+                    type: string
+                - name: paginator.infinite.limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.infinite.next
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBookResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - BookService
+            description: Create a new book
+            operationId: BookService_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBookRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBookResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/bookshelves:
+        get:
+            tags:
+                - BookShelfService
+            operationId: BookShelfService_List
+            parameters:
+                - name: paginator.classical.page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.classical.limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.classical.total
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.classical.next
+                  in: query
+                  schema:
+                    type: boolean
+                - name: paginator.classical.order.by
+                  in: query
+                  schema:
+                    type: string
+                - name: paginator.classical.order.desc
+                  in: query
+                  schema:
+                    type: boolean
+                - name: paginator.infinite.sequence
+                  in: query
+                  schema:
+                    type: string
+                - name: paginator.infinite.limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: paginator.infinite.next
+                  in: query
+                  schema:
+                    type: boolean
+                - name: id.eq
+                  in: query
+                  schema:
+                    type: string
+                - name: id.ne
+                  in: query
+                  schema:
+                    type: string
+                - name: id.gt
+                  in: query
+                  schema:
+                    type: string
+                - name: id.gte
+                  in: query
+                  schema:
+                    type: string
+                - name: id.lt
+                  in: query
+                  schema:
+                    type: string
+                - name: id.lte
+                  in: query
+                  schema:
+                    type: string
+                - name: id.between.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: id.in.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: name.eq
+                  in: query
+                  schema:
+                    type: string
+                - name: name.ne
+                  in: query
+                  schema:
+                    type: string
+                - name: name.gt
+                  in: query
+                  schema:
+                    type: string
+                - name: name.gte
+                  in: query
+                  schema:
+                    type: string
+                - name: name.lt
+                  in: query
+                  schema:
+                    type: string
+                - name: name.lte
+                  in: query
+                  schema:
+                    type: string
+                - name: name.between.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: name.in.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: name.eqFold
+                  in: query
+                  schema:
+                    type: string
+                - name: name.contains
+                  in: query
+                  schema:
+                    type: string
+                - name: name.hasPrefix
+                  in: query
+                  schema:
+                    type: string
+                - name: name.hasSuffix
+                  in: query
+                  schema:
+                    type: string
+                - name: name.like
+                  in: query
+                  schema:
+                    type: string
+                - name: withBooks
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBookShelfResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - BookShelfService
+            operationId: BookShelfService_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBookShelfRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBookShelfResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        Book:
+            type: object
+            properties:
+                title:
+                    type: string
+                abstract:
+                    type: string
+        BookShelf:
+            type: object
+            properties:
+                name:
+                    type: string
+                books:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Book'
+        ClassicalPaginator:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                limit:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+                next:
+                    type: boolean
+                order:
+                    $ref: '#/components/schemas/Order'
+        CreateBookRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                abstract:
+                    type: string
+        CreateBookResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/Book'
+        CreateBookShelfRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                bookIds:
+                    type: array
+                    items:
+                        type: string
+        CreateBookShelfResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/BookShelf'
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        InfinitePaginator:
+            type: object
+            properties:
+                sequence:
+                    type: string
+                limit:
+                    type: integer
+                    format: int32
+                next:
+                    type: boolean
+        ListBookResponse:
+            type: object
+            properties:
+                paginator:
+                    $ref: '#/components/schemas/Paginator'
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Book'
+        ListBookShelfResponse:
+            type: object
+            properties:
+                paginator:
+                    $ref: '#/components/schemas/Paginator'
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/BookShelf'
+        Order:
+            type: object
+            properties:
+                by:
+                    type: string
+                desc:
+                    type: boolean
+        Paginator:
+            type: object
+            properties:
+                classical:
+                    $ref: '#/components/schemas/ClassicalPaginator'
+                infinite:
+                    $ref: '#/components/schemas/InfinitePaginator'
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+tags:
+    - name: BookService
+    - name: BookShelfService

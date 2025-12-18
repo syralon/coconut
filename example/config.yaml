@@ -12,3 +12,7 @@ gateway:
 etcd:
   endpoints:
     - 127.0.0.1:32379
+
+database:
+  driver: sqlite3
+  source: ':memory:'

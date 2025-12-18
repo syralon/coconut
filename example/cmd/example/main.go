@@ -5,19 +5,15 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/syralon/coconut"
 	"github.com/syralon/coconut/configuration"
 	"github.com/syralon/coconut/example/internal/config"
 	"github.com/syralon/coconut/example/internal/global/snowflake"
+	"github.com/syralon/coconut/example/internal/server"
 	"github.com/syralon/coconut/logs"
 	"github.com/syralon/coconut/pkg/etcdutil"
 	"github.com/syralon/coconut/transport"
-	"github.com/syralon/coconut/transport/gateway"
-	"github.com/syralon/coconut/transport/gateway/middleware"
-	"github.com/syralon/coconut/transport/grpc"
-	"github.com/syralon/coconut/transport/grpc/interceptor"
-	stdgrpc "google.golang.org/grpc"
+	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
 func init() {
@@ -28,28 +24,17 @@ func init() {
 	)
 }
 
-func main() {
+func newApp(client *clientv3.Client, servers server.Servers) (*coconut.App, error) {
 	ctx := context.Background()
-
-	c := new(config.Config)
-	if err := configuration.Read(ctx, c); err != nil {
-		panic(err)
-	}
-
-	client, err := c.ETCD.NewClient()
-	if err != nil {
-		panic(err)
-	}
 
 	roulette := etcdutil.NewRoulette("example", client)
 	id, err := roulette.Allocate(ctx)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	if err = snowflake.Setup(id); err != nil {
-		panic(err)
+		return nil, err
 	}
-
 	app := coconut.NewApp(
 		coconut.WithHooks(
 			transport.Logger(),
@@ -59,20 +44,46 @@ func main() {
 			coconut.ReleaserFunc(roulette.Release),
 		),
 	)
+	app.Add(servers...)
+	return app, nil
+}
 
-	srv1 := gateway.NewServer(&c.Gateway)
-	srv1.WithOptions(
-		runtime.WithMiddlewares(
-			middleware.Logger(),
-			middleware.OTEL(),
-		),
-	)
-	srv2 := grpc.NewServer(&c.GRPC)
-	srv2.WithUnaryInterceptor(interceptor.RecoveryUnaryServerInterceptor())
-	srv2.WithStreamInterceptor(interceptor.RecoveryStreamServerInterceptor())
-	srv2.WithOptions(stdgrpc.StatsHandler(interceptor.NewServerHandler()))
-	app.Add(srv1).Add(srv2)
-	if err := app.Run(ctx); err != nil {
+func main() {
+	ctx := context.Background()
+
+	c := new(config.Config)
+	if err := configuration.Read(ctx, c); err != nil {
 		panic(err)
 	}
+
+	//client, err := c.ETCD.NewClient()
+	//if err != nil {
+	//	panic(err)
+	//}
+	//
+	//app := coconut.NewApp(
+	//	coconut.WithHooks(
+	//		transport.Logger(),
+	//		transport.Registry(etcdutil.NewRegistry(client)),
+	//	),
+	//	coconut.WithReleaser(
+	//		coconut.ReleaserFunc(roulette.Release),
+	//	),
+	//)
+	//
+	//srv1 := gateway.NewServer(&c.Gateway)
+	//srv1.WithOptions(
+	//	runtime.WithMiddlewares(
+	//		middleware.Logger(),
+	//		middleware.OTEL(),
+	//	),
+	//)
+	//srv2 := grpc.NewServer(&c.GRPC)
+	//srv2.WithUnaryInterceptor(interceptor.RecoveryUnaryServerInterceptor())
+	//srv2.WithStreamInterceptor(interceptor.RecoveryStreamServerInterceptor())
+	//srv2.WithOptions(stdgrpc.StatsHandler(interceptor.NewServerHandler()))
+	//app.Add(srv1).Add(srv2)
+	//if err := app.Run(ctx); err != nil {
+	//	panic(err)
+	//}
 }
