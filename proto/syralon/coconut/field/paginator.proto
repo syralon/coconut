@@ -12,7 +12,7 @@ message Order {
 message ClassicalPaginator {
   int32 page = 1;
   int32 limit = 2;
-  int32 total = 3;
+  int64 total = 3;
   bool next = 4;
   Order order = 5;
 }

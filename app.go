@@ -42,7 +42,16 @@ func NewApp(options ...Option) *App {
 	return app
 }
 
-func (a *App) Add(server transport.Server, hooks ...transport.ServerHook) *App {
+func (a *App) Add(servers ...transport.Server) *App {
+	for _, srv := range servers {
+		srv = transport.WithHooks(srv, a.hooks...)
+		a.servers = append(a.servers, srv)
+		a.releasers = append(a.releasers, srv)
+	}
+	return a
+}
+
+func (a *App) AddWithHooks(server transport.Server, hooks ...transport.ServerHook) *App {
 	server = transport.WithHooks(server, append(a.hooks, hooks...)...)
 	a.servers = append(a.servers, server)
 	a.releasers = append(a.releasers, server)

@@ -5,6 +5,7 @@ go 1.24.0
 toolchain go1.24.10
 
 require (
+	entgo.io/ent v0.14.5
 	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
 	github.com/stretchr/testify v1.11.1

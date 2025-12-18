@@ -6,4 +6,5 @@ import (
 
 type Config struct {
 	common.HTTPConfig
+	Endpoint string
 }

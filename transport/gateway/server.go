@@ -35,7 +35,7 @@ func NewServer(c *Config) *Server {
 		options: []runtime.ServeMuxOption{
 			runtime.WithErrorHandler(DefaultErrorHandler()),
 		},
-		endpoint: c.Endpoint(),
+		endpoint: c.Config.Endpoint(),
 	}
 	if s.c.TLS.KeyFile != "" && s.c.TLS.CertFile != "" {
 		s.endpoint.Scheme = mesh.HTTPS
@@ -113,4 +113,10 @@ func (s *Server) Shutdown(ctx context.Context) error {
 
 func (s *Server) Endpoint() (*mesh.Endpoint, bool) {
 	return s.endpoint, true
+}
+
+func ServerRegister[T any](srv T, fn func(ctx context.Context, mux *runtime.ServeMux, srv T) error) Register {
+	return func(ctx context.Context, mux *runtime.ServeMux) error {
+		return fn(ctx, mux, srv)
+	}
 }
