@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
-	github.com/syralon/coconut v0.0.0-20251217101102-b5d69a2f4a59
+	github.com/syralon/coconut v0.0.0-20251218022116-41451d84bd7c
 	github.com/syralon/coconut/pkg/etcdutil v0.0.0-20251217102055-2837510c71e2
 	github.com/syralon/snowflake v0.0.0-20251126030518-38724ee4d165
 	google.golang.org/grpc v1.77.0

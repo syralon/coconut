@@ -36,8 +36,8 @@ github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0t
 github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
 github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
-github.com/syralon/coconut v0.0.0-20251217101102-b5d69a2f4a59 h1:HthPbAiIMlXXDd+cUsSe2YDDAe4XNXD+fCILHg0U4/0=
-github.com/syralon/coconut v0.0.0-20251217101102-b5d69a2f4a59/go.mod h1:9T7+Kq9OvVvBceJRK3QAUqI3C+1lo+uOYv8nvfFtKkk=
+github.com/syralon/coconut v0.0.0-20251218022116-41451d84bd7c h1:RVEE1uJVC2Cnqi8NUNW6Rfbk3wK5VnxuNfzBYmFIREI=
+github.com/syralon/coconut v0.0.0-20251218022116-41451d84bd7c/go.mod h1:3RKf6ppf7Ffjp7bUUkqfMNIAqIKGO09m5iMYYO77eak=
 github.com/syralon/coconut/pkg/etcdutil v0.0.0-20251217102055-2837510c71e2 h1:68L3edkeixJyICMCKLdZMmvf6DNCXbxkefsvqEiCYt4=
 github.com/syralon/coconut/pkg/etcdutil v0.0.0-20251217102055-2837510c71e2/go.mod h1:1igAG9G10+d+61sgCjUDA0cVPR7fywv5otQvY+iveYY=
 github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a h1:/9rmTYQ/a+t0i8OYogN2l1lwpZVedGus2foyTBr+RaI=
