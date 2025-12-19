@@ -8,7 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/google/wire v0.7.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
-	github.com/syralon/coconut v0.0.0-20251218102741-80b5be59777e
+	github.com/syralon/coconut v0.0.0-20251219060518-9e63662bf3bf
 	github.com/syralon/coconut/pkg/etcdutil v0.0.0-20251217102055-2837510c71e2
 	github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a
 	github.com/syralon/snowflake v0.0.0-20251126030518-38724ee4d165
@@ -16,7 +16,6 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20251022142026-3a174f9686a8
 	google.golang.org/grpc v1.77.0
 	google.golang.org/protobuf v1.36.11
-	modernc.org/sqlite v1.40.1
 )
 
 require (
@@ -62,5 +61,6 @@ require (
 	modernc.org/libc v1.66.10 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
+	modernc.org/sqlite v1.40.1 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )

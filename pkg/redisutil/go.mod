@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/google/uuid v1.6.0
 	github.com/redis/go-redis/v9 v9.17.2
-	github.com/syralon/coconut v0.0.0-20251218102741-80b5be59777e
+	github.com/syralon/coconut v0.0.0-20251219060518-9e63662bf3bf
 )
 
 require (
