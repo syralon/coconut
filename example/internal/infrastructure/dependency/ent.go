@@ -1,4 +1,4 @@
-package infra
+package dependency
 
 import (
 	"github.com/syralon/coconut/example/ent"

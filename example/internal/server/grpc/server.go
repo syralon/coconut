@@ -1,8 +1,8 @@
 package grpc
 
 import (
+	"github.com/syralon/coconut/example/internal/api/controller"
 	"github.com/syralon/coconut/example/internal/config"
-	"github.com/syralon/coconut/example/internal/controller"
 	"github.com/syralon/coconut/example/proto/syralon/example"
 	"github.com/syralon/coconut/transport"
 	"github.com/syralon/coconut/transport/grpc"

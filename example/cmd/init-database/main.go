@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	client, clean, err := infra.NewEntClient(&config.Config{Database: config.Database{Driver: "sqlite3", Source: "example.db?_pragma=foreign_keys%3Don"}})
+	client, clean, err := infrastructure.NewEntClient(&config.Config{Database: config.Database{Driver: "sqlite3", Source: "example.db?_pragma=foreign_keys%3Don"}})
 	if err != nil {
 		panic(err)
 	}

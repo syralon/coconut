@@ -3,21 +3,16 @@ package bookshelfservice
 import (
 	"context"
 
-	"github.com/syralon/coconut/example/internal/message"
+	"github.com/syralon/coconut/example/internal/api/message"
 	"github.com/syralon/coconut/example/proto/syralon/example"
 )
 
 type createController struct {
-	*Dependency
+	*Controller
 }
 
 func (c *createController) Create(ctx context.Context, request *example.CreateBookShelfRequest) (*example.CreateBookShelfResponse, error) {
-	create := c.client.Create().
-		SetName(request.GetName())
-	if len(request.GetBookIds()) > 0 {
-		create.AddRelBookIDs(request.GetBookIds()...)
-	}
-	data, err := create.Save(ctx)
+	data, err := c.rep.Create(ctx, request.GetCreate())
 	if err != nil {
 		return nil, err
 	}

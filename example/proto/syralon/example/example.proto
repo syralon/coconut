@@ -7,6 +7,7 @@ import "google/protobuf/descriptor.proto";
 import "syralon/coconut/field/field.proto";
 import "syralon/coconut/field/paginator.proto";
 import "buf/validate/validate.proto";
+import "google/api/field_behavior.proto";
 
 option go_package = "github.com/syralon/coconut/example/proto/syralon/example;example";
 
@@ -26,14 +27,50 @@ message BookShelf {
   repeated Book books = 3;
 }
 
+message BookCreate {
+  string title = 2;
+  string abstract = 3;
+}
+message BookUpdate {
+  optional string title = 2;
+  optional string abstract = 3;
+}
+message BookOptions {
+  repeated ListBookOrder orders = 1;
+  syralon.coconut.field.Int64Field id = 2;
+  syralon.coconut.field.StringField title = 3;
+
+}
+
+message BookShelfCreate {
+  string name = 1[(buf.validate.field).required = true,(google.api.field_behavior)=REQUIRED];
+  repeated int64 book_ids =2;
+}
+message BookShelfUpdate {
+  optional string name = 1;
+  repeated int64 book_ids =2;
+}
+
+message BookShelfOptions {
+  syralon.coconut.field.Int64Field id = 1;
+  syralon.coconut.field.StringField name = 2;
+  bool with_books = 3;
+}
+
 message CreateBookRequest {
-  string title = 1[(buf.validate.field).required= true];
-  string abstract = 2[(buf.validate.field).required= true];
+  BookCreate create = 1;
 }
 
 message CreateBookResponse {
   Book data = 1;
 }
+
+message UpdateBookRequest {
+  int64 id = 1;
+  BookUpdate update = 2;
+}
+
+message UpdateBookResponse {}
 
 message ListBookOrder {
   BookOrder by = 1;
@@ -42,15 +79,40 @@ message ListBookOrder {
 
 message ListBookRequest {
   syralon.coconut.field.Paginator paginator = 1;
-  repeated ListBookOrder orders = 2;
-  syralon.coconut.field.Int64Field id = 3;
-  syralon.coconut.field.StringField title = 4;
+  BookOptions options = 2;
 }
 
 message ListBookResponse {
   syralon.coconut.field.Paginator paginator = 1;
   repeated Book data = 2;
 }
+
+
+message CreateBookShelfRequest {
+  BookShelfCreate create = 1;
+}
+
+message CreateBookShelfResponse {
+  BookShelf data = 1;
+}
+
+message UpdateBookShelfRequest {
+  int64 id = 1;
+  BookShelfUpdate update = 2;
+}
+
+message UpdateBookShelfResponse {}
+
+message ListBookShelfRequest {
+  syralon.coconut.field.Paginator paginator = 1;
+  BookShelfOptions options = 2;
+}
+
+message ListBookShelfResponse {
+  syralon.coconut.field.Paginator paginator = 1;
+  repeated BookShelf data = 2;
+}
+
 
 service BookService {
   // Create a new book
@@ -64,27 +126,10 @@ service BookService {
   rpc List(ListBookRequest) returns (ListBookResponse) {
     option (google.api.http) = {get: "/api/books"};
   }
-}
-
-message CreateBookShelfRequest {
-  string name = 1[(buf.validate.field).required= true];
-  repeated int64 book_ids = 2;
-}
-
-message CreateBookShelfResponse {
-  BookShelf data = 1;
-}
-
-message ListBookShelfRequest {
-  syralon.coconut.field.Paginator paginator = 1;
-  syralon.coconut.field.Int64Field id = 2;
-  syralon.coconut.field.StringField name = 3;
-  bool with_books = 4;
-}
-
-message ListBookShelfResponse {
-  syralon.coconut.field.Paginator paginator = 1;
-  repeated BookShelf data = 2;
+  // Update books
+  rpc Update(UpdateBookRequest) returns (UpdateBookResponse){
+    option (google.api.http) = {put: "/api/books/{id}",body:"*"};
+  };
 }
 
 service BookShelfService {
@@ -96,5 +141,11 @@ service BookShelfService {
   }
   rpc List(ListBookShelfRequest) returns (ListBookShelfResponse) {
     option (google.api.http) = {get: "/api/bookshelves"};
+  }
+  rpc Update(UpdateBookShelfRequest) returns (UpdateBookShelfResponse) {
+    option (google.api.http) = {
+      post: "/api/bookshelves/{id}"
+      body: "*"
+    };
   }
 }

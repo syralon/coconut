@@ -53,95 +53,95 @@ paths:
                   in: query
                   schema:
                     type: boolean
-                - name: id.eq
+                - name: options.id.eq
                   in: query
                   schema:
                     type: string
-                - name: id.ne
+                - name: options.id.ne
                   in: query
                   schema:
                     type: string
-                - name: id.gt
+                - name: options.id.gt
                   in: query
                   schema:
                     type: string
-                - name: id.gte
+                - name: options.id.gte
                   in: query
                   schema:
                     type: string
-                - name: id.lt
+                - name: options.id.lt
                   in: query
                   schema:
                     type: string
-                - name: id.lte
+                - name: options.id.lte
                   in: query
                   schema:
                     type: string
-                - name: id.between.list
+                - name: options.id.between.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: id.in.list
+                - name: options.id.in.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: title.eq
+                - name: options.title.eq
                   in: query
                   schema:
                     type: string
-                - name: title.ne
+                - name: options.title.ne
                   in: query
                   schema:
                     type: string
-                - name: title.gt
+                - name: options.title.gt
                   in: query
                   schema:
                     type: string
-                - name: title.gte
+                - name: options.title.gte
                   in: query
                   schema:
                     type: string
-                - name: title.lt
+                - name: options.title.lt
                   in: query
                   schema:
                     type: string
-                - name: title.lte
+                - name: options.title.lte
                   in: query
                   schema:
                     type: string
-                - name: title.between.list
+                - name: options.title.between.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: title.in.list
+                - name: options.title.in.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: title.eqFold
+                - name: options.title.eqFold
                   in: query
                   schema:
                     type: string
-                - name: title.contains
+                - name: options.title.contains
                   in: query
                   schema:
                     type: string
-                - name: title.hasPrefix
+                - name: options.title.hasPrefix
                   in: query
                   schema:
                     type: string
-                - name: title.hasSuffix
+                - name: options.title.hasSuffix
                   in: query
                   schema:
                     type: string
-                - name: title.like
+                - name: options.title.like
                   in: query
                   schema:
                     type: string
@@ -176,6 +176,37 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CreateBookResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/books/{id}:
+        put:
+            tags:
+                - BookService
+            description: Update books
+            operationId: BookService_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateBookRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateBookResponse'
                 default:
                     description: Default error response
                     content:
@@ -228,99 +259,99 @@ paths:
                   in: query
                   schema:
                     type: boolean
-                - name: id.eq
+                - name: options.id.eq
                   in: query
                   schema:
                     type: string
-                - name: id.ne
+                - name: options.id.ne
                   in: query
                   schema:
                     type: string
-                - name: id.gt
+                - name: options.id.gt
                   in: query
                   schema:
                     type: string
-                - name: id.gte
+                - name: options.id.gte
                   in: query
                   schema:
                     type: string
-                - name: id.lt
+                - name: options.id.lt
                   in: query
                   schema:
                     type: string
-                - name: id.lte
+                - name: options.id.lte
                   in: query
                   schema:
                     type: string
-                - name: id.between.list
+                - name: options.id.between.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: id.in.list
+                - name: options.id.in.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: name.eq
+                - name: options.name.eq
                   in: query
                   schema:
                     type: string
-                - name: name.ne
+                - name: options.name.ne
                   in: query
                   schema:
                     type: string
-                - name: name.gt
+                - name: options.name.gt
                   in: query
                   schema:
                     type: string
-                - name: name.gte
+                - name: options.name.gte
                   in: query
                   schema:
                     type: string
-                - name: name.lt
+                - name: options.name.lt
                   in: query
                   schema:
                     type: string
-                - name: name.lte
+                - name: options.name.lte
                   in: query
                   schema:
                     type: string
-                - name: name.between.list
+                - name: options.name.between.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: name.in.list
+                - name: options.name.in.list
                   in: query
                   schema:
                     type: array
                     items:
                         type: string
-                - name: name.eqFold
+                - name: options.name.eqFold
                   in: query
                   schema:
                     type: string
-                - name: name.contains
+                - name: options.name.contains
                   in: query
                   schema:
                     type: string
-                - name: name.hasPrefix
+                - name: options.name.hasPrefix
                   in: query
                   schema:
                     type: string
-                - name: name.hasSuffix
+                - name: options.name.hasSuffix
                   in: query
                   schema:
                     type: string
-                - name: name.like
+                - name: options.name.like
                   in: query
                   schema:
                     type: string
-                - name: withBooks
+                - name: options.withBooks
                   in: query
                   schema:
                     type: boolean
@@ -360,6 +391,36 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /api/bookshelves/{id}:
+        post:
+            tags:
+                - BookShelfService
+            operationId: BookShelfService_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateBookShelfRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateBookShelfResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
         Book:
@@ -367,6 +428,13 @@ components:
             properties:
                 id:
                     type: string
+                title:
+                    type: string
+                abstract:
+                    type: string
+        BookCreate:
+            type: object
+            properties:
                 title:
                     type: string
                 abstract:
@@ -382,6 +450,33 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Book'
+        BookShelfCreate:
+            required:
+                - name
+            type: object
+            properties:
+                name:
+                    type: string
+                bookIds:
+                    type: array
+                    items:
+                        type: string
+        BookShelfUpdate:
+            type: object
+            properties:
+                name:
+                    type: string
+                bookIds:
+                    type: array
+                    items:
+                        type: string
+        BookUpdate:
+            type: object
+            properties:
+                title:
+                    type: string
+                abstract:
+                    type: string
         ClassicalPaginator:
             type: object
             properties:
@@ -401,10 +496,8 @@ components:
         CreateBookRequest:
             type: object
             properties:
-                title:
-                    type: string
-                abstract:
-                    type: string
+                create:
+                    $ref: '#/components/schemas/BookCreate'
         CreateBookResponse:
             type: object
             properties:
@@ -413,12 +506,8 @@ components:
         CreateBookShelfRequest:
             type: object
             properties:
-                name:
-                    type: string
-                bookIds:
-                    type: array
-                    items:
-                        type: string
+                create:
+                    $ref: '#/components/schemas/BookShelfCreate'
         CreateBookShelfResponse:
             type: object
             properties:
@@ -490,6 +579,26 @@ components:
                         $ref: '#/components/schemas/GoogleProtobufAny'
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        UpdateBookRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                update:
+                    $ref: '#/components/schemas/BookUpdate'
+        UpdateBookResponse:
+            type: object
+            properties: {}
+        UpdateBookShelfRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                update:
+                    $ref: '#/components/schemas/BookShelfUpdate'
+        UpdateBookShelfResponse:
+            type: object
+            properties: {}
 tags:
     - name: BookService
     - name: BookShelfService

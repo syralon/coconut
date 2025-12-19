@@ -2,8 +2,8 @@ package server
 
 import (
 	"github.com/google/wire"
+	"github.com/syralon/coconut/example/internal/api/controller"
 	"github.com/syralon/coconut/example/internal/config"
-	"github.com/syralon/coconut/example/internal/controller"
 	"github.com/syralon/coconut/example/internal/server/gateway"
 	"github.com/syralon/coconut/example/internal/server/grpc"
 	"github.com/syralon/coconut/transport"

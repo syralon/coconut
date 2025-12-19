@@ -5,14 +5,14 @@ import (
 	"strings"
 )
 
-// SetupController
+// SetupControllers
 // auto setup service's controllers by reflect, the controller name must be ended with 'Controller'.
-func SetupController(service, dependency any) {
+func SetupControllers(service, data any) {
 	v := reflect.ValueOf(service)
 	if v.Kind() == reflect.Ptr {
 		v = v.Elem()
 	}
-	dep := reflect.ValueOf(dependency)
+	dep := reflect.ValueOf(data)
 
 	for i := 0; i < v.NumField(); i++ {
 		field := v.Field(i)
