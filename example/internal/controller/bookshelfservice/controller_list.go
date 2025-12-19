@@ -1,55 +1,22 @@
-package service
+package bookshelfservice
 
 import (
 	"context"
 
-	"github.com/syralon/coconut/example/ent"
 	"github.com/syralon/coconut/example/ent/bookshelf"
 	"github.com/syralon/coconut/example/ent/predicate"
+	"github.com/syralon/coconut/example/internal/message"
 	"github.com/syralon/coconut/example/proto/syralon/example"
 	"github.com/syralon/coconut/proto/syralon/coconut/field"
 	"github.com/syralon/coconut/toolkit/xslices"
 )
 
-type BookShelfService struct {
-	example.UnimplementedBookShelfServiceServer
-
-	client *ent.BookShelfClient
+type listController struct {
+	*Dependency
 }
 
-func NewBookShelfService(client *ent.Client) *BookShelfService {
-	return &BookShelfService{client: client.BookShelf}
-}
-
-func BookShelfToProto(data *ent.BookShelf) *example.BookShelf {
-	shelf := &example.BookShelf{
-		Id:   data.ID,
-		Name: data.Name,
-	}
-	if data.Edges.RelBooks != nil {
-		shelf.Books = make([]*example.Book, 0, len(data.Edges.RelBooks))
-	}
-	for _, book := range data.Edges.RelBooks {
-		shelf.Books = append(shelf.Books, BookToProto(book))
-	}
-	return shelf
-}
-
-func (s *BookShelfService) Create(ctx context.Context, request *example.CreateBookShelfRequest) (*example.CreateBookShelfResponse, error) {
-	create := s.client.Create().
-		SetName(request.GetName())
-	if len(request.GetBookIds()) > 0 {
-		create.AddRelBookIDs(request.GetBookIds()...)
-	}
-	data, err := create.Save(ctx)
-	if err != nil {
-		return nil, err
-	}
-	return &example.CreateBookShelfResponse{Data: BookShelfToProto(data)}, nil
-}
-
-func (s *BookShelfService) List(ctx context.Context, request *example.ListBookShelfRequest) (*example.ListBookShelfResponse, error) {
-	query := s.client.Query().Where(
+func (c *listController) List(ctx context.Context, request *example.ListBookShelfRequest) (*example.ListBookShelfResponse, error) {
+	query := c.client.Query().Where(
 		field.Selectors[predicate.BookShelf](
 			request.GetId().Selector(bookshelf.FieldID),
 			request.GetName().Selector(bookshelf.FieldName),
@@ -83,7 +50,7 @@ func (s *BookShelfService) List(ctx context.Context, request *example.ListBookSh
 		return nil, err
 	}
 	return &example.ListBookShelfResponse{
-		Data:      xslices.Trans(data, BookShelfToProto),
+		Data:      xslices.Trans(data, message.BookShelfToProto),
 		Paginator: request.GetPaginator(),
 	}, nil
 }

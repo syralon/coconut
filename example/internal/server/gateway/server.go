@@ -2,13 +2,13 @@ package gateway
 
 import (
 	"github.com/syralon/coconut/example/internal/config"
-	"github.com/syralon/coconut/example/internal/service"
+	"github.com/syralon/coconut/example/internal/controller"
 	"github.com/syralon/coconut/example/proto/syralon/example"
 	"github.com/syralon/coconut/transport"
 	"github.com/syralon/coconut/transport/gateway"
 )
 
-func NewServer(c *config.Config, services *service.Services) transport.Server {
+func NewServer(c *config.Config, services *controller.Services) transport.Server {
 	srv := gateway.NewServer(&c.Gateway)
 	if c.Gateway.Endpoint != "" {
 		srv.RegisterEndpoint(
@@ -18,8 +18,8 @@ func NewServer(c *config.Config, services *service.Services) transport.Server {
 		)
 	} else {
 		srv.Register(
-			gateway.ServerRegister[example.BookServiceServer](services.Book, example.RegisterBookServiceHandlerServer),
-			gateway.ServerRegister[example.BookShelfServiceServer](services.BookShelf, example.RegisterBookShelfServiceHandlerServer),
+			gateway.ServerRegister[example.BookServiceServer](services.BookService, example.RegisterBookServiceHandlerServer),
+			gateway.ServerRegister[example.BookShelfServiceServer](services.BookShelfService, example.RegisterBookShelfServiceHandlerServer),
 		)
 	}
 	return srv

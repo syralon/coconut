@@ -1,49 +1,23 @@
-package service
+package bookservice
 
 import (
 	"context"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/syralon/coconut/example/ent"
 	"github.com/syralon/coconut/example/ent/book"
 	"github.com/syralon/coconut/example/ent/predicate"
+	"github.com/syralon/coconut/example/internal/message"
 	"github.com/syralon/coconut/example/proto/syralon/example"
 	"github.com/syralon/coconut/proto/syralon/coconut/field"
 	"github.com/syralon/coconut/toolkit/xslices"
 )
 
-var BookOrderBy = map[example.BookOrder]string{
-	example.BookOrder_BookOrderByID: book.FieldID,
+type listController struct {
+	*Dependency
 }
 
-type BookService struct {
-	example.UnimplementedBookServiceServer
-
-	client *ent.BookClient
-}
-
-func NewBookService(client *ent.Client) *BookService {
-	return &BookService{client: client.Book}
-}
-
-func BookToProto(data *ent.Book) *example.Book {
-	return &example.Book{
-		Id:       data.ID,
-		Title:    data.Title,
-		Abstract: data.Abstract,
-	}
-}
-
-func (s *BookService) Create(ctx context.Context, request *example.CreateBookRequest) (*example.CreateBookResponse, error) {
-	data, err := s.client.Create().SetTitle(request.GetTitle()).SetAbstract(request.GetAbstract()).Save(ctx)
-	if err != nil {
-		return nil, err
-	}
-	return &example.CreateBookResponse{Data: BookToProto(data)}, nil
-}
-
-func (s *BookService) List(ctx context.Context, request *example.ListBookRequest) (*example.ListBookResponse, error) {
-	query := s.client.Query().Where(
+func (c *listController) List(ctx context.Context, request *example.ListBookRequest) (*example.ListBookResponse, error) {
+	query := c.client.Query().Where(
 		field.Selectors[predicate.Book](
 			request.GetId().Selector(book.FieldID),
 			request.GetTitle().Selector(book.FieldTitle),
@@ -84,7 +58,7 @@ func (s *BookService) List(ctx context.Context, request *example.ListBookRequest
 		return nil, err
 	}
 	return &example.ListBookResponse{
-		Data:      xslices.Trans(data, BookToProto),
+		Data:      xslices.Trans(data, message.BookToProto),
 		Paginator: request.GetPaginator(),
 	}, nil
 }

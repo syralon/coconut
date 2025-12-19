@@ -9,9 +9,9 @@ package main
 import (
 	"github.com/syralon/coconut"
 	"github.com/syralon/coconut/example/internal/config"
+	"github.com/syralon/coconut/example/internal/controller"
 	"github.com/syralon/coconut/example/internal/infra"
 	"github.com/syralon/coconut/example/internal/server"
-	"github.com/syralon/coconut/example/internal/service"
 )
 
 // Injectors from wire.go:
@@ -26,7 +26,7 @@ func initialize(config2 *config.Config) (*coconut.App, func(), error) {
 		cleanup()
 		return nil, nil, err
 	}
-	services := service.NewServices(entClient)
+	services := controller.NewServices(entClient)
 	servers := server.NewServers(config2, services)
 	app, err := newApp(client, servers)
 	if err != nil {
