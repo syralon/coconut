@@ -26,10 +26,11 @@ func NewBookService(client *ent.Client) *BookService {
 	return &BookService{client: client.Book}
 }
 
-func BookToProto(book *ent.Book) *example.Book {
+func BookToProto(data *ent.Book) *example.Book {
 	return &example.Book{
-		Title:    book.Title,
-		Abstract: book.Abstract,
+		Id:       data.ID,
+		Title:    data.Title,
+		Abstract: data.Abstract,
 	}
 }
 
@@ -44,8 +45,8 @@ func (s *BookService) Create(ctx context.Context, request *example.CreateBookReq
 func (s *BookService) List(ctx context.Context, request *example.ListBookRequest) (*example.ListBookResponse, error) {
 	query := s.client.Query().Where(
 		field.Selectors[predicate.Book](
-			field.Int64FieldList(request.GetId()).Selector(book.FieldID),
-			field.StringFieldList(request.GetTitle()).Selector(book.FieldTitle),
+			request.GetId().Selector(book.FieldID),
+			request.GetTitle().Selector(book.FieldTitle),
 		)...,
 	)
 

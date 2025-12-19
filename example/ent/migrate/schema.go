@@ -37,26 +37,26 @@ var (
 		Columns:    BookShelvesColumns,
 		PrimaryKey: []*schema.Column{BookShelvesColumns[0]},
 	}
-	// BookShelvesColumns holds the columns for the "book_shelves" table.
-	BookShelvesColumns = []*schema.Column{
+	// BookRelShelvesColumns holds the columns for the "book_rel_shelves" table.
+	BookRelShelvesColumns = []*schema.Column{
 		{Name: "book_id", Type: field.TypeInt64},
 		{Name: "book_shelf_id", Type: field.TypeInt64},
 	}
-	// BookShelvesTable holds the schema information for the "book_shelves" table.
-	BookShelvesTable = &schema.Table{
-		Name:       "book_shelves",
-		Columns:    BookShelvesColumns,
-		PrimaryKey: []*schema.Column{BookShelvesColumns[0], BookShelvesColumns[1]},
+	// BookRelShelvesTable holds the schema information for the "book_rel_shelves" table.
+	BookRelShelvesTable = &schema.Table{
+		Name:       "book_rel_shelves",
+		Columns:    BookRelShelvesColumns,
+		PrimaryKey: []*schema.Column{BookRelShelvesColumns[0], BookRelShelvesColumns[1]},
 		ForeignKeys: []*schema.ForeignKey{
 			{
-				Symbol:     "book_shelves_book_id",
-				Columns:    []*schema.Column{BookShelvesColumns[0]},
+				Symbol:     "book_rel_shelves_book_id",
+				Columns:    []*schema.Column{BookRelShelvesColumns[0]},
 				RefColumns: []*schema.Column{BooksColumns[0]},
 				OnDelete:   schema.Cascade,
 			},
 			{
-				Symbol:     "book_shelves_book_shelf_id",
-				Columns:    []*schema.Column{BookShelvesColumns[1]},
+				Symbol:     "book_rel_shelves_book_shelf_id",
+				Columns:    []*schema.Column{BookRelShelvesColumns[1]},
 				RefColumns: []*schema.Column{BookShelvesColumns[0]},
 				OnDelete:   schema.Cascade,
 			},
@@ -66,11 +66,11 @@ var (
 	Tables = []*schema.Table{
 		BooksTable,
 		BookShelvesTable,
-		BookShelvesTable,
+		BookRelShelvesTable,
 	}
 )
 
 func init() {
-	BookShelvesTable.ForeignKeys[0].RefTable = BooksTable
-	BookShelvesTable.ForeignKeys[1].RefTable = BookShelvesTable
+	BookRelShelvesTable.ForeignKeys[0].RefTable = BooksTable
+	BookRelShelvesTable.ForeignKeys[1].RefTable = BookShelvesTable
 }

@@ -14,15 +14,16 @@ enum BookOrder {
   BookOrderByID = 0;
 }
 
-
 message Book {
-  string title = 1;
-  string abstract = 2;
+  int64 id = 1;
+  string title = 2;
+  string abstract = 3;
 }
 
 message BookShelf {
-  string name = 1;
-  repeated Book books = 2;
+  int64 id = 1;
+  string name = 2;
+  repeated Book books = 3;
 }
 
 message CreateBookRequest {
@@ -42,8 +43,8 @@ message ListBookOrder {
 message ListBookRequest {
   syralon.coconut.field.Paginator paginator = 1;
   repeated ListBookOrder orders = 2;
-  repeated syralon.coconut.field.Int64Field id = 3;
-  repeated syralon.coconut.field.StringField title = 4;
+  syralon.coconut.field.Int64Field id = 3;
+  syralon.coconut.field.StringField title = 4;
 }
 
 message ListBookResponse {

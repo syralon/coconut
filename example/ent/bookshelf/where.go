@@ -215,21 +215,21 @@ func UpdatedAtLTE(v time.Time) predicate.BookShelf {
 	return predicate.BookShelf(sql.FieldLTE(FieldUpdatedAt, v))
 }
 
-// HasBooks applies the HasEdge predicate on the "books" edge.
-func HasBooks() predicate.BookShelf {
+// HasRelBooks applies the HasEdge predicate on the "rel_books" edge.
+func HasRelBooks() predicate.BookShelf {
 	return predicate.BookShelf(func(s *sql.Selector) {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, true, BooksTable, BooksPrimaryKey...),
+			sqlgraph.Edge(sqlgraph.M2M, true, RelBooksTable, RelBooksPrimaryKey...),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
 }
 
-// HasBooksWith applies the HasEdge predicate on the "books" edge with a given conditions (other predicates).
-func HasBooksWith(preds ...predicate.Book) predicate.BookShelf {
+// HasRelBooksWith applies the HasEdge predicate on the "rel_books" edge with a given conditions (other predicates).
+func HasRelBooksWith(preds ...predicate.Book) predicate.BookShelf {
 	return predicate.BookShelf(func(s *sql.Selector) {
-		step := newBooksStep()
+		step := newRelBooksStep()
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {
 				p(s)

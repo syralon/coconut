@@ -56,34 +56,12 @@ func main() {
 		panic(err)
 	}
 
-	//client, err := c.ETCD.NewClient()
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
-	//app := coconut.NewApp(
-	//	coconut.WithHooks(
-	//		transport.Logger(),
-	//		transport.Registry(etcdutil.NewRegistry(client)),
-	//	),
-	//	coconut.WithReleaser(
-	//		coconut.ReleaserFunc(roulette.Release),
-	//	),
-	//)
-	//
-	//srv1 := gateway.NewServer(&c.Gateway)
-	//srv1.WithOptions(
-	//	runtime.WithMiddlewares(
-	//		middleware.Logger(),
-	//		middleware.OTEL(),
-	//	),
-	//)
-	//srv2 := grpc.NewServer(&c.GRPC)
-	//srv2.WithUnaryInterceptor(interceptor.RecoveryUnaryServerInterceptor())
-	//srv2.WithStreamInterceptor(interceptor.RecoveryStreamServerInterceptor())
-	//srv2.WithOptions(stdgrpc.StatsHandler(interceptor.NewServerHandler()))
-	//app.Add(srv1).Add(srv2)
-	//if err := app.Run(ctx); err != nil {
-	//	panic(err)
-	//}
+	app, clean, err := initialize(c)
+	if err != nil {
+		panic(err)
+	}
+	defer clean()
+	if err = app.Run(ctx); err != nil {
+		panic(err)
+	}
 }

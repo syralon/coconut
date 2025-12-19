@@ -111,19 +111,19 @@ func (_c *BookCreate) SetNillableID(v *int64) *BookCreate {
 	return _c
 }
 
-// AddShelfIDs adds the "shelves" edge to the BookShelf entity by IDs.
-func (_c *BookCreate) AddShelfIDs(ids ...int64) *BookCreate {
-	_c.mutation.AddShelfIDs(ids...)
+// AddRelShelfIDs adds the "rel_shelves" edge to the BookShelf entity by IDs.
+func (_c *BookCreate) AddRelShelfIDs(ids ...int64) *BookCreate {
+	_c.mutation.AddRelShelfIDs(ids...)
 	return _c
 }
 
-// AddShelves adds the "shelves" edges to the BookShelf entity.
-func (_c *BookCreate) AddShelves(v ...*BookShelf) *BookCreate {
+// AddRelShelves adds the "rel_shelves" edges to the BookShelf entity.
+func (_c *BookCreate) AddRelShelves(v ...*BookShelf) *BookCreate {
 	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
-	return _c.AddShelfIDs(ids...)
+	return _c.AddRelShelfIDs(ids...)
 }
 
 // Mutation returns the BookMutation object of the builder.
@@ -242,12 +242,12 @@ func (_c *BookCreate) createSpec() (*Book, *sqlgraph.CreateSpec) {
 		_spec.SetField(book.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if nodes := _c.mutation.ShelvesIDs(); len(nodes) > 0 {
+	if nodes := _c.mutation.RelShelvesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),

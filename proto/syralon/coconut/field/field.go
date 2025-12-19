@@ -244,6 +244,8 @@ func (f *StringField) Selector(column string) []func(*sql.Selector) {
 		return []func(*sql.Selector){sql.FieldHasPrefix(column, v.HasPrefix)}
 	case *StringField_HasSuffix:
 		return []func(*sql.Selector){sql.FieldHasSuffix(column, v.HasSuffix)}
+	case *StringField_Like:
+		return []func(*sql.Selector){sql.FieldContains(column, v.Like)}
 	default:
 		return nil
 	}

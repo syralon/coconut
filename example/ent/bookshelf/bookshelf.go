@@ -20,15 +20,15 @@ const (
 	FieldCreatedAt = "created_at"
 	// FieldUpdatedAt holds the string denoting the updated_at field in the database.
 	FieldUpdatedAt = "updated_at"
-	// EdgeBooks holds the string denoting the books edge name in mutations.
-	EdgeBooks = "books"
+	// EdgeRelBooks holds the string denoting the rel_books edge name in mutations.
+	EdgeRelBooks = "rel_books"
 	// Table holds the table name of the bookshelf in the database.
 	Table = "book_shelves"
-	// BooksTable is the table that holds the books relation/edge. The primary key declared below.
-	BooksTable = "book_shelves"
-	// BooksInverseTable is the table name for the Book entity.
+	// RelBooksTable is the table that holds the rel_books relation/edge. The primary key declared below.
+	RelBooksTable = "book_rel_shelves"
+	// RelBooksInverseTable is the table name for the Book entity.
 	// It exists in this package in order to avoid circular dependency with the "book" package.
-	BooksInverseTable = "books"
+	RelBooksInverseTable = "books"
 )
 
 // Columns holds all SQL columns for bookshelf fields.
@@ -40,9 +40,9 @@ var Columns = []string{
 }
 
 var (
-	// BooksPrimaryKey and BooksColumn2 are the table columns denoting the
-	// primary key for the books relation (M2M).
-	BooksPrimaryKey = []string{"book_id", "book_shelf_id"}
+	// RelBooksPrimaryKey and RelBooksColumn2 are the table columns denoting the
+	// primary key for the rel_books relation (M2M).
+	RelBooksPrimaryKey = []string{"book_id", "book_shelf_id"}
 )
 
 // ValidColumn reports if the column name is valid (part of the table columns).
@@ -89,23 +89,23 @@ func ByUpdatedAt(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldUpdatedAt, opts...).ToFunc()
 }
 
-// ByBooksCount orders the results by books count.
-func ByBooksCount(opts ...sql.OrderTermOption) OrderOption {
+// ByRelBooksCount orders the results by rel_books count.
+func ByRelBooksCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborsCount(s, newBooksStep(), opts...)
+		sqlgraph.OrderByNeighborsCount(s, newRelBooksStep(), opts...)
 	}
 }
 
-// ByBooks orders the results by books terms.
-func ByBooks(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
+// ByRelBooks orders the results by rel_books terms.
+func ByRelBooks(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborTerms(s, newBooksStep(), append([]sql.OrderTerm{term}, terms...)...)
+		sqlgraph.OrderByNeighborTerms(s, newRelBooksStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
-func newBooksStep() *sqlgraph.Step {
+func newRelBooksStep() *sqlgraph.Step {
 	return sqlgraph.NewStep(
 		sqlgraph.From(Table, FieldID),
-		sqlgraph.To(BooksInverseTable, FieldID),
-		sqlgraph.Edge(sqlgraph.M2M, true, BooksTable, BooksPrimaryKey...),
+		sqlgraph.To(RelBooksInverseTable, FieldID),
+		sqlgraph.Edge(sqlgraph.M2M, true, RelBooksTable, RelBooksPrimaryKey...),
 	)
 }

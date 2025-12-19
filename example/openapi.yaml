@@ -53,6 +53,98 @@ paths:
                   in: query
                   schema:
                     type: boolean
+                - name: id.eq
+                  in: query
+                  schema:
+                    type: string
+                - name: id.ne
+                  in: query
+                  schema:
+                    type: string
+                - name: id.gt
+                  in: query
+                  schema:
+                    type: string
+                - name: id.gte
+                  in: query
+                  schema:
+                    type: string
+                - name: id.lt
+                  in: query
+                  schema:
+                    type: string
+                - name: id.lte
+                  in: query
+                  schema:
+                    type: string
+                - name: id.between.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: id.in.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: title.eq
+                  in: query
+                  schema:
+                    type: string
+                - name: title.ne
+                  in: query
+                  schema:
+                    type: string
+                - name: title.gt
+                  in: query
+                  schema:
+                    type: string
+                - name: title.gte
+                  in: query
+                  schema:
+                    type: string
+                - name: title.lt
+                  in: query
+                  schema:
+                    type: string
+                - name: title.lte
+                  in: query
+                  schema:
+                    type: string
+                - name: title.between.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: title.in.list
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: title.eqFold
+                  in: query
+                  schema:
+                    type: string
+                - name: title.contains
+                  in: query
+                  schema:
+                    type: string
+                - name: title.hasPrefix
+                  in: query
+                  schema:
+                    type: string
+                - name: title.hasSuffix
+                  in: query
+                  schema:
+                    type: string
+                - name: title.like
+                  in: query
+                  schema:
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -273,6 +365,8 @@ components:
         Book:
             type: object
             properties:
+                id:
+                    type: string
                 title:
                     type: string
                 abstract:
@@ -280,6 +374,8 @@ components:
         BookShelf:
             type: object
             properties:
+                id:
+                    type: string
                 name:
                     type: string
                 books:

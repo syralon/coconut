@@ -23,21 +23,25 @@ func NewBookShelfService(client *ent.Client) *BookShelfService {
 
 func BookShelfToProto(data *ent.BookShelf) *example.BookShelf {
 	shelf := &example.BookShelf{
+		Id:   data.ID,
 		Name: data.Name,
 	}
-	if data.Edges.Books != nil {
-		shelf.Books = make([]*example.Book, 0, len(data.Edges.Books))
+	if data.Edges.RelBooks != nil {
+		shelf.Books = make([]*example.Book, 0, len(data.Edges.RelBooks))
 	}
-	for _, book := range data.Edges.Books {
+	for _, book := range data.Edges.RelBooks {
 		shelf.Books = append(shelf.Books, BookToProto(book))
 	}
 	return shelf
 }
 
 func (s *BookShelfService) Create(ctx context.Context, request *example.CreateBookShelfRequest) (*example.CreateBookShelfResponse, error) {
-	data, err := s.client.Create().
-		SetName(request.GetName()).
-		Save(ctx)
+	create := s.client.Create().
+		SetName(request.GetName())
+	if len(request.GetBookIds()) > 0 {
+		create.AddRelBookIDs(request.GetBookIds()...)
+	}
+	data, err := create.Save(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +56,7 @@ func (s *BookShelfService) List(ctx context.Context, request *example.ListBookSh
 		)...,
 	)
 	if request.GetWithBooks() {
-		query = query.WithBooks()
+		query = query.WithRelBooks()
 	}
 
 	if paginator := request.GetPaginator(); paginator != nil {

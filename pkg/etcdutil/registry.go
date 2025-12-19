@@ -27,7 +27,7 @@ func (r *Registry) Register(ctx context.Context, endpoint *mesh.Endpoint) (*mesh
 	if err != nil {
 		return nil, err
 	}
-	if _, err = r.client.KeepAlive(ctx, lease.ID); err != nil {
+	if err = keepalive(ctx, r.client, lease.ID); err != nil {
 		return nil, err
 	}
 	id := fmt.Sprintf("%s/%s_%s", endpoint.Name, endpoint.Scheme, endpoint.ID)

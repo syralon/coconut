@@ -15,4 +15,4 @@ etcd:
 
 database:
   driver: sqlite3
-  source: ':memory:'
+  source: 'example.db?_pragma=foreign_keys%3Don'

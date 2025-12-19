@@ -20,11 +20,11 @@ import (
 // BookShelfQuery is the builder for querying BookShelf entities.
 type BookShelfQuery struct {
 	config
-	ctx        *QueryContext
-	order      []bookshelf.OrderOption
-	inters     []Interceptor
-	predicates []predicate.BookShelf
-	withBooks  *BookQuery
+	ctx          *QueryContext
+	order        []bookshelf.OrderOption
+	inters       []Interceptor
+	predicates   []predicate.BookShelf
+	withRelBooks *BookQuery
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
 	path func(context.Context) (*sql.Selector, error)
@@ -61,8 +61,8 @@ func (_q *BookShelfQuery) Order(o ...bookshelf.OrderOption) *BookShelfQuery {
 	return _q
 }
 
-// QueryBooks chains the current query on the "books" edge.
-func (_q *BookShelfQuery) QueryBooks() *BookQuery {
+// QueryRelBooks chains the current query on the "rel_books" edge.
+func (_q *BookShelfQuery) QueryRelBooks() *BookQuery {
 	query := (&BookClient{config: _q.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
 		if err := _q.prepareQuery(ctx); err != nil {
@@ -75,7 +75,7 @@ func (_q *BookShelfQuery) QueryBooks() *BookQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(bookshelf.Table, bookshelf.FieldID, selector),
 			sqlgraph.To(book.Table, book.FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, true, bookshelf.BooksTable, bookshelf.BooksPrimaryKey...),
+			sqlgraph.Edge(sqlgraph.M2M, true, bookshelf.RelBooksTable, bookshelf.RelBooksPrimaryKey...),
 		)
 		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
 		return fromU, nil
@@ -270,26 +270,26 @@ func (_q *BookShelfQuery) Clone() *BookShelfQuery {
 		return nil
 	}
 	return &BookShelfQuery{
-		config:     _q.config,
-		ctx:        _q.ctx.Clone(),
-		order:      append([]bookshelf.OrderOption{}, _q.order...),
-		inters:     append([]Interceptor{}, _q.inters...),
-		predicates: append([]predicate.BookShelf{}, _q.predicates...),
-		withBooks:  _q.withBooks.Clone(),
+		config:       _q.config,
+		ctx:          _q.ctx.Clone(),
+		order:        append([]bookshelf.OrderOption{}, _q.order...),
+		inters:       append([]Interceptor{}, _q.inters...),
+		predicates:   append([]predicate.BookShelf{}, _q.predicates...),
+		withRelBooks: _q.withRelBooks.Clone(),
 		// clone intermediate query.
 		sql:  _q.sql.Clone(),
 		path: _q.path,
 	}
 }
 
-// WithBooks tells the query-builder to eager-load the nodes that are connected to
-// the "books" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *BookShelfQuery) WithBooks(opts ...func(*BookQuery)) *BookShelfQuery {
+// WithRelBooks tells the query-builder to eager-load the nodes that are connected to
+// the "rel_books" edge. The optional arguments are used to configure the query builder of the edge.
+func (_q *BookShelfQuery) WithRelBooks(opts ...func(*BookQuery)) *BookShelfQuery {
 	query := (&BookClient{config: _q.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withBooks = query
+	_q.withRelBooks = query
 	return _q
 }
 
@@ -372,7 +372,7 @@ func (_q *BookShelfQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Bo
 		nodes       = []*BookShelf{}
 		_spec       = _q.querySpec()
 		loadedTypes = [1]bool{
-			_q.withBooks != nil,
+			_q.withRelBooks != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
@@ -393,17 +393,17 @@ func (_q *BookShelfQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Bo
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withBooks; query != nil {
-		if err := _q.loadBooks(ctx, query, nodes,
-			func(n *BookShelf) { n.Edges.Books = []*Book{} },
-			func(n *BookShelf, e *Book) { n.Edges.Books = append(n.Edges.Books, e) }); err != nil {
+	if query := _q.withRelBooks; query != nil {
+		if err := _q.loadRelBooks(ctx, query, nodes,
+			func(n *BookShelf) { n.Edges.RelBooks = []*Book{} },
+			func(n *BookShelf, e *Book) { n.Edges.RelBooks = append(n.Edges.RelBooks, e) }); err != nil {
 			return nil, err
 		}
 	}
 	return nodes, nil
 }
 
-func (_q *BookShelfQuery) loadBooks(ctx context.Context, query *BookQuery, nodes []*BookShelf, init func(*BookShelf), assign func(*BookShelf, *Book)) error {
+func (_q *BookShelfQuery) loadRelBooks(ctx context.Context, query *BookQuery, nodes []*BookShelf, init func(*BookShelf), assign func(*BookShelf, *Book)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
 	byID := make(map[int64]*BookShelf)
 	nids := make(map[int64]map[*BookShelf]struct{})
@@ -415,11 +415,11 @@ func (_q *BookShelfQuery) loadBooks(ctx context.Context, query *BookQuery, nodes
 		}
 	}
 	query.Where(func(s *sql.Selector) {
-		joinT := sql.Table(bookshelf.BooksTable)
-		s.Join(joinT).On(s.C(book.FieldID), joinT.C(bookshelf.BooksPrimaryKey[0]))
-		s.Where(sql.InValues(joinT.C(bookshelf.BooksPrimaryKey[1]), edgeIDs...))
+		joinT := sql.Table(bookshelf.RelBooksTable)
+		s.Join(joinT).On(s.C(book.FieldID), joinT.C(bookshelf.RelBooksPrimaryKey[0]))
+		s.Where(sql.InValues(joinT.C(bookshelf.RelBooksPrimaryKey[1]), edgeIDs...))
 		columns := s.SelectedColumns()
-		s.Select(joinT.C(bookshelf.BooksPrimaryKey[1]))
+		s.Select(joinT.C(bookshelf.RelBooksPrimaryKey[1]))
 		s.AppendSelect(columns...)
 		s.SetDistinct(false)
 	})
@@ -456,7 +456,7 @@ func (_q *BookShelfQuery) loadBooks(ctx context.Context, query *BookQuery, nodes
 	for _, n := range neighbors {
 		nodes, ok := nids[n.ID]
 		if !ok {
-			return fmt.Errorf(`unexpected "books" node returned %v`, n.ID)
+			return fmt.Errorf(`unexpected "rel_books" node returned %v`, n.ID)
 		}
 		for kn := range nodes {
 			assign(kn, n)

@@ -123,19 +123,19 @@ func (_u *BookUpdate) SetUpdatedAt(v time.Time) *BookUpdate {
 	return _u
 }
 
-// AddShelfIDs adds the "shelves" edge to the BookShelf entity by IDs.
-func (_u *BookUpdate) AddShelfIDs(ids ...int64) *BookUpdate {
-	_u.mutation.AddShelfIDs(ids...)
+// AddRelShelfIDs adds the "rel_shelves" edge to the BookShelf entity by IDs.
+func (_u *BookUpdate) AddRelShelfIDs(ids ...int64) *BookUpdate {
+	_u.mutation.AddRelShelfIDs(ids...)
 	return _u
 }
 
-// AddShelves adds the "shelves" edges to the BookShelf entity.
-func (_u *BookUpdate) AddShelves(v ...*BookShelf) *BookUpdate {
+// AddRelShelves adds the "rel_shelves" edges to the BookShelf entity.
+func (_u *BookUpdate) AddRelShelves(v ...*BookShelf) *BookUpdate {
 	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
-	return _u.AddShelfIDs(ids...)
+	return _u.AddRelShelfIDs(ids...)
 }
 
 // Mutation returns the BookMutation object of the builder.
@@ -143,25 +143,25 @@ func (_u *BookUpdate) Mutation() *BookMutation {
 	return _u.mutation
 }
 
-// ClearShelves clears all "shelves" edges to the BookShelf entity.
-func (_u *BookUpdate) ClearShelves() *BookUpdate {
-	_u.mutation.ClearShelves()
+// ClearRelShelves clears all "rel_shelves" edges to the BookShelf entity.
+func (_u *BookUpdate) ClearRelShelves() *BookUpdate {
+	_u.mutation.ClearRelShelves()
 	return _u
 }
 
-// RemoveShelfIDs removes the "shelves" edge to BookShelf entities by IDs.
-func (_u *BookUpdate) RemoveShelfIDs(ids ...int64) *BookUpdate {
-	_u.mutation.RemoveShelfIDs(ids...)
+// RemoveRelShelfIDs removes the "rel_shelves" edge to BookShelf entities by IDs.
+func (_u *BookUpdate) RemoveRelShelfIDs(ids ...int64) *BookUpdate {
+	_u.mutation.RemoveRelShelfIDs(ids...)
 	return _u
 }
 
-// RemoveShelves removes "shelves" edges to BookShelf entities.
-func (_u *BookUpdate) RemoveShelves(v ...*BookShelf) *BookUpdate {
+// RemoveRelShelves removes "rel_shelves" edges to BookShelf entities.
+func (_u *BookUpdate) RemoveRelShelves(v ...*BookShelf) *BookUpdate {
 	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
-	return _u.RemoveShelfIDs(ids...)
+	return _u.RemoveRelShelfIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
@@ -236,12 +236,12 @@ func (_u *BookUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	if value, ok := _u.mutation.UpdatedAt(); ok {
 		_spec.SetField(book.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if _u.mutation.ShelvesCleared() {
+	if _u.mutation.RelShelvesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),
@@ -249,12 +249,12 @@ func (_u *BookUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedShelvesIDs(); len(nodes) > 0 && !_u.mutation.ShelvesCleared() {
+	if nodes := _u.mutation.RemovedRelShelvesIDs(); len(nodes) > 0 && !_u.mutation.RelShelvesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),
@@ -265,12 +265,12 @@ func (_u *BookUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ShelvesIDs(); len(nodes) > 0 {
+	if nodes := _u.mutation.RelShelvesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),
@@ -395,19 +395,19 @@ func (_u *BookUpdateOne) SetUpdatedAt(v time.Time) *BookUpdateOne {
 	return _u
 }
 
-// AddShelfIDs adds the "shelves" edge to the BookShelf entity by IDs.
-func (_u *BookUpdateOne) AddShelfIDs(ids ...int64) *BookUpdateOne {
-	_u.mutation.AddShelfIDs(ids...)
+// AddRelShelfIDs adds the "rel_shelves" edge to the BookShelf entity by IDs.
+func (_u *BookUpdateOne) AddRelShelfIDs(ids ...int64) *BookUpdateOne {
+	_u.mutation.AddRelShelfIDs(ids...)
 	return _u
 }
 
-// AddShelves adds the "shelves" edges to the BookShelf entity.
-func (_u *BookUpdateOne) AddShelves(v ...*BookShelf) *BookUpdateOne {
+// AddRelShelves adds the "rel_shelves" edges to the BookShelf entity.
+func (_u *BookUpdateOne) AddRelShelves(v ...*BookShelf) *BookUpdateOne {
 	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
-	return _u.AddShelfIDs(ids...)
+	return _u.AddRelShelfIDs(ids...)
 }
 
 // Mutation returns the BookMutation object of the builder.
@@ -415,25 +415,25 @@ func (_u *BookUpdateOne) Mutation() *BookMutation {
 	return _u.mutation
 }
 
-// ClearShelves clears all "shelves" edges to the BookShelf entity.
-func (_u *BookUpdateOne) ClearShelves() *BookUpdateOne {
-	_u.mutation.ClearShelves()
+// ClearRelShelves clears all "rel_shelves" edges to the BookShelf entity.
+func (_u *BookUpdateOne) ClearRelShelves() *BookUpdateOne {
+	_u.mutation.ClearRelShelves()
 	return _u
 }
 
-// RemoveShelfIDs removes the "shelves" edge to BookShelf entities by IDs.
-func (_u *BookUpdateOne) RemoveShelfIDs(ids ...int64) *BookUpdateOne {
-	_u.mutation.RemoveShelfIDs(ids...)
+// RemoveRelShelfIDs removes the "rel_shelves" edge to BookShelf entities by IDs.
+func (_u *BookUpdateOne) RemoveRelShelfIDs(ids ...int64) *BookUpdateOne {
+	_u.mutation.RemoveRelShelfIDs(ids...)
 	return _u
 }
 
-// RemoveShelves removes "shelves" edges to BookShelf entities.
-func (_u *BookUpdateOne) RemoveShelves(v ...*BookShelf) *BookUpdateOne {
+// RemoveRelShelves removes "rel_shelves" edges to BookShelf entities.
+func (_u *BookUpdateOne) RemoveRelShelves(v ...*BookShelf) *BookUpdateOne {
 	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
-	return _u.RemoveShelfIDs(ids...)
+	return _u.RemoveRelShelfIDs(ids...)
 }
 
 // Where appends a list predicates to the BookUpdate builder.
@@ -538,12 +538,12 @@ func (_u *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) {
 	if value, ok := _u.mutation.UpdatedAt(); ok {
 		_spec.SetField(book.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if _u.mutation.ShelvesCleared() {
+	if _u.mutation.RelShelvesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),
@@ -551,12 +551,12 @@ func (_u *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedShelvesIDs(); len(nodes) > 0 && !_u.mutation.ShelvesCleared() {
+	if nodes := _u.mutation.RemovedRelShelvesIDs(); len(nodes) > 0 && !_u.mutation.RelShelvesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),
@@ -567,12 +567,12 @@ func (_u *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ShelvesIDs(); len(nodes) > 0 {
+	if nodes := _u.mutation.RelShelvesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
-			Table:   book.ShelvesTable,
-			Columns: book.ShelvesPrimaryKey,
+			Table:   book.RelShelvesTable,
+			Columns: book.RelShelvesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(bookshelf.FieldID, field.TypeInt64),

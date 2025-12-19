@@ -32,22 +32,22 @@ const (
 // BookMutation represents an operation that mutates the Book nodes in the graph.
 type BookMutation struct {
 	config
-	op             Op
-	typ            string
-	id             *int64
-	title          *string
-	abstract       *string
-	author         *string
-	cover          *string
-	created_at     *time.Time
-	updated_at     *time.Time
-	clearedFields  map[string]struct{}
-	shelves        map[int64]struct{}
-	removedshelves map[int64]struct{}
-	clearedshelves bool
-	done           bool
-	oldValue       func(context.Context) (*Book, error)
-	predicates     []predicate.Book
+	op                 Op
+	typ                string
+	id                 *int64
+	title              *string
+	abstract           *string
+	author             *string
+	cover              *string
+	created_at         *time.Time
+	updated_at         *time.Time
+	clearedFields      map[string]struct{}
+	rel_shelves        map[int64]struct{}
+	removedrel_shelves map[int64]struct{}
+	clearedrel_shelves bool
+	done               bool
+	oldValue           func(context.Context) (*Book, error)
+	predicates         []predicate.Book
 }
 
 var _ ent.Mutation = (*BookMutation)(nil)
@@ -409,58 +409,58 @@ func (m *BookMutation) ResetUpdatedAt() {
 	m.updated_at = nil
 }
 
-// AddShelfIDs adds the "shelves" edge to the BookShelf entity by ids.
-func (m *BookMutation) AddShelfIDs(ids ...int64) {
-	if m.shelves == nil {
-		m.shelves = make(map[int64]struct{})
+// AddRelShelfIDs adds the "rel_shelves" edge to the BookShelf entity by ids.
+func (m *BookMutation) AddRelShelfIDs(ids ...int64) {
+	if m.rel_shelves == nil {
+		m.rel_shelves = make(map[int64]struct{})
 	}
 	for i := range ids {
-		m.shelves[ids[i]] = struct{}{}
+		m.rel_shelves[ids[i]] = struct{}{}
 	}
 }
 
-// ClearShelves clears the "shelves" edge to the BookShelf entity.
-func (m *BookMutation) ClearShelves() {
-	m.clearedshelves = true
+// ClearRelShelves clears the "rel_shelves" edge to the BookShelf entity.
+func (m *BookMutation) ClearRelShelves() {
+	m.clearedrel_shelves = true
 }
 
-// ShelvesCleared reports if the "shelves" edge to the BookShelf entity was cleared.
-func (m *BookMutation) ShelvesCleared() bool {
-	return m.clearedshelves
+// RelShelvesCleared reports if the "rel_shelves" edge to the BookShelf entity was cleared.
+func (m *BookMutation) RelShelvesCleared() bool {
+	return m.clearedrel_shelves
 }
 
-// RemoveShelfIDs removes the "shelves" edge to the BookShelf entity by IDs.
-func (m *BookMutation) RemoveShelfIDs(ids ...int64) {
-	if m.removedshelves == nil {
-		m.removedshelves = make(map[int64]struct{})
+// RemoveRelShelfIDs removes the "rel_shelves" edge to the BookShelf entity by IDs.
+func (m *BookMutation) RemoveRelShelfIDs(ids ...int64) {
+	if m.removedrel_shelves == nil {
+		m.removedrel_shelves = make(map[int64]struct{})
 	}
 	for i := range ids {
-		delete(m.shelves, ids[i])
-		m.removedshelves[ids[i]] = struct{}{}
+		delete(m.rel_shelves, ids[i])
+		m.removedrel_shelves[ids[i]] = struct{}{}
 	}
 }
 
-// RemovedShelves returns the removed IDs of the "shelves" edge to the BookShelf entity.
-func (m *BookMutation) RemovedShelvesIDs() (ids []int64) {
-	for id := range m.removedshelves {
+// RemovedRelShelves returns the removed IDs of the "rel_shelves" edge to the BookShelf entity.
+func (m *BookMutation) RemovedRelShelvesIDs() (ids []int64) {
+	for id := range m.removedrel_shelves {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// ShelvesIDs returns the "shelves" edge IDs in the mutation.
-func (m *BookMutation) ShelvesIDs() (ids []int64) {
-	for id := range m.shelves {
+// RelShelvesIDs returns the "rel_shelves" edge IDs in the mutation.
+func (m *BookMutation) RelShelvesIDs() (ids []int64) {
+	for id := range m.rel_shelves {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// ResetShelves resets all changes to the "shelves" edge.
-func (m *BookMutation) ResetShelves() {
-	m.shelves = nil
-	m.clearedshelves = false
-	m.removedshelves = nil
+// ResetRelShelves resets all changes to the "rel_shelves" edge.
+func (m *BookMutation) ResetRelShelves() {
+	m.rel_shelves = nil
+	m.clearedrel_shelves = false
+	m.removedrel_shelves = nil
 }
 
 // Where appends a list predicates to the BookMutation builder.
@@ -703,8 +703,8 @@ func (m *BookMutation) ResetField(name string) error {
 // AddedEdges returns all edge names that were set/added in this mutation.
 func (m *BookMutation) AddedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.shelves != nil {
-		edges = append(edges, book.EdgeShelves)
+	if m.rel_shelves != nil {
+		edges = append(edges, book.EdgeRelShelves)
 	}
 	return edges
 }
@@ -713,9 +713,9 @@ func (m *BookMutation) AddedEdges() []string {
 // name in this mutation.
 func (m *BookMutation) AddedIDs(name string) []ent.Value {
 	switch name {
-	case book.EdgeShelves:
-		ids := make([]ent.Value, 0, len(m.shelves))
-		for id := range m.shelves {
+	case book.EdgeRelShelves:
+		ids := make([]ent.Value, 0, len(m.rel_shelves))
+		for id := range m.rel_shelves {
 			ids = append(ids, id)
 		}
 		return ids
@@ -726,8 +726,8 @@ func (m *BookMutation) AddedIDs(name string) []ent.Value {
 // RemovedEdges returns all edge names that were removed in this mutation.
 func (m *BookMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.removedshelves != nil {
-		edges = append(edges, book.EdgeShelves)
+	if m.removedrel_shelves != nil {
+		edges = append(edges, book.EdgeRelShelves)
 	}
 	return edges
 }
@@ -736,9 +736,9 @@ func (m *BookMutation) RemovedEdges() []string {
 // the given name in this mutation.
 func (m *BookMutation) RemovedIDs(name string) []ent.Value {
 	switch name {
-	case book.EdgeShelves:
-		ids := make([]ent.Value, 0, len(m.removedshelves))
-		for id := range m.removedshelves {
+	case book.EdgeRelShelves:
+		ids := make([]ent.Value, 0, len(m.removedrel_shelves))
+		for id := range m.removedrel_shelves {
 			ids = append(ids, id)
 		}
 		return ids
@@ -749,8 +749,8 @@ func (m *BookMutation) RemovedIDs(name string) []ent.Value {
 // ClearedEdges returns all edge names that were cleared in this mutation.
 func (m *BookMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.clearedshelves {
-		edges = append(edges, book.EdgeShelves)
+	if m.clearedrel_shelves {
+		edges = append(edges, book.EdgeRelShelves)
 	}
 	return edges
 }
@@ -759,8 +759,8 @@ func (m *BookMutation) ClearedEdges() []string {
 // was cleared in this mutation.
 func (m *BookMutation) EdgeCleared(name string) bool {
 	switch name {
-	case book.EdgeShelves:
-		return m.clearedshelves
+	case book.EdgeRelShelves:
+		return m.clearedrel_shelves
 	}
 	return false
 }
@@ -777,8 +777,8 @@ func (m *BookMutation) ClearEdge(name string) error {
 // It returns an error if the edge is not defined in the schema.
 func (m *BookMutation) ResetEdge(name string) error {
 	switch name {
-	case book.EdgeShelves:
-		m.ResetShelves()
+	case book.EdgeRelShelves:
+		m.ResetRelShelves()
 		return nil
 	}
 	return fmt.Errorf("unknown Book edge %s", name)
@@ -787,19 +787,19 @@ func (m *BookMutation) ResetEdge(name string) error {
 // BookShelfMutation represents an operation that mutates the BookShelf nodes in the graph.
 type BookShelfMutation struct {
 	config
-	op            Op
-	typ           string
-	id            *int64
-	name          *string
-	created_at    *time.Time
-	updated_at    *time.Time
-	clearedFields map[string]struct{}
-	books         map[int64]struct{}
-	removedbooks  map[int64]struct{}
-	clearedbooks  bool
-	done          bool
-	oldValue      func(context.Context) (*BookShelf, error)
-	predicates    []predicate.BookShelf
+	op               Op
+	typ              string
+	id               *int64
+	name             *string
+	created_at       *time.Time
+	updated_at       *time.Time
+	clearedFields    map[string]struct{}
+	rel_books        map[int64]struct{}
+	removedrel_books map[int64]struct{}
+	clearedrel_books bool
+	done             bool
+	oldValue         func(context.Context) (*BookShelf, error)
+	predicates       []predicate.BookShelf
 }
 
 var _ ent.Mutation = (*BookShelfMutation)(nil)
@@ -1014,58 +1014,58 @@ func (m *BookShelfMutation) ResetUpdatedAt() {
 	m.updated_at = nil
 }
 
-// AddBookIDs adds the "books" edge to the Book entity by ids.
-func (m *BookShelfMutation) AddBookIDs(ids ...int64) {
-	if m.books == nil {
-		m.books = make(map[int64]struct{})
+// AddRelBookIDs adds the "rel_books" edge to the Book entity by ids.
+func (m *BookShelfMutation) AddRelBookIDs(ids ...int64) {
+	if m.rel_books == nil {
+		m.rel_books = make(map[int64]struct{})
 	}
 	for i := range ids {
-		m.books[ids[i]] = struct{}{}
+		m.rel_books[ids[i]] = struct{}{}
 	}
 }
 
-// ClearBooks clears the "books" edge to the Book entity.
-func (m *BookShelfMutation) ClearBooks() {
-	m.clearedbooks = true
+// ClearRelBooks clears the "rel_books" edge to the Book entity.
+func (m *BookShelfMutation) ClearRelBooks() {
+	m.clearedrel_books = true
 }
 
-// BooksCleared reports if the "books" edge to the Book entity was cleared.
-func (m *BookShelfMutation) BooksCleared() bool {
-	return m.clearedbooks
+// RelBooksCleared reports if the "rel_books" edge to the Book entity was cleared.
+func (m *BookShelfMutation) RelBooksCleared() bool {
+	return m.clearedrel_books
 }
 
-// RemoveBookIDs removes the "books" edge to the Book entity by IDs.
-func (m *BookShelfMutation) RemoveBookIDs(ids ...int64) {
-	if m.removedbooks == nil {
-		m.removedbooks = make(map[int64]struct{})
+// RemoveRelBookIDs removes the "rel_books" edge to the Book entity by IDs.
+func (m *BookShelfMutation) RemoveRelBookIDs(ids ...int64) {
+	if m.removedrel_books == nil {
+		m.removedrel_books = make(map[int64]struct{})
 	}
 	for i := range ids {
-		delete(m.books, ids[i])
-		m.removedbooks[ids[i]] = struct{}{}
+		delete(m.rel_books, ids[i])
+		m.removedrel_books[ids[i]] = struct{}{}
 	}
 }
 
-// RemovedBooks returns the removed IDs of the "books" edge to the Book entity.
-func (m *BookShelfMutation) RemovedBooksIDs() (ids []int64) {
-	for id := range m.removedbooks {
+// RemovedRelBooks returns the removed IDs of the "rel_books" edge to the Book entity.
+func (m *BookShelfMutation) RemovedRelBooksIDs() (ids []int64) {
+	for id := range m.removedrel_books {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// BooksIDs returns the "books" edge IDs in the mutation.
-func (m *BookShelfMutation) BooksIDs() (ids []int64) {
-	for id := range m.books {
+// RelBooksIDs returns the "rel_books" edge IDs in the mutation.
+func (m *BookShelfMutation) RelBooksIDs() (ids []int64) {
+	for id := range m.rel_books {
 		ids = append(ids, id)
 	}
 	return
 }
 
-// ResetBooks resets all changes to the "books" edge.
-func (m *BookShelfMutation) ResetBooks() {
-	m.books = nil
-	m.clearedbooks = false
-	m.removedbooks = nil
+// ResetRelBooks resets all changes to the "rel_books" edge.
+func (m *BookShelfMutation) ResetRelBooks() {
+	m.rel_books = nil
+	m.clearedrel_books = false
+	m.removedrel_books = nil
 }
 
 // Where appends a list predicates to the BookShelfMutation builder.
@@ -1236,8 +1236,8 @@ func (m *BookShelfMutation) ResetField(name string) error {
 // AddedEdges returns all edge names that were set/added in this mutation.
 func (m *BookShelfMutation) AddedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.books != nil {
-		edges = append(edges, bookshelf.EdgeBooks)
+	if m.rel_books != nil {
+		edges = append(edges, bookshelf.EdgeRelBooks)
 	}
 	return edges
 }
@@ -1246,9 +1246,9 @@ func (m *BookShelfMutation) AddedEdges() []string {
 // name in this mutation.
 func (m *BookShelfMutation) AddedIDs(name string) []ent.Value {
 	switch name {
-	case bookshelf.EdgeBooks:
-		ids := make([]ent.Value, 0, len(m.books))
-		for id := range m.books {
+	case bookshelf.EdgeRelBooks:
+		ids := make([]ent.Value, 0, len(m.rel_books))
+		for id := range m.rel_books {
 			ids = append(ids, id)
 		}
 		return ids
@@ -1259,8 +1259,8 @@ func (m *BookShelfMutation) AddedIDs(name string) []ent.Value {
 // RemovedEdges returns all edge names that were removed in this mutation.
 func (m *BookShelfMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.removedbooks != nil {
-		edges = append(edges, bookshelf.EdgeBooks)
+	if m.removedrel_books != nil {
+		edges = append(edges, bookshelf.EdgeRelBooks)
 	}
 	return edges
 }
@@ -1269,9 +1269,9 @@ func (m *BookShelfMutation) RemovedEdges() []string {
 // the given name in this mutation.
 func (m *BookShelfMutation) RemovedIDs(name string) []ent.Value {
 	switch name {
-	case bookshelf.EdgeBooks:
-		ids := make([]ent.Value, 0, len(m.removedbooks))
-		for id := range m.removedbooks {
+	case bookshelf.EdgeRelBooks:
+		ids := make([]ent.Value, 0, len(m.removedrel_books))
+		for id := range m.removedrel_books {
 			ids = append(ids, id)
 		}
 		return ids
@@ -1282,8 +1282,8 @@ func (m *BookShelfMutation) RemovedIDs(name string) []ent.Value {
 // ClearedEdges returns all edge names that were cleared in this mutation.
 func (m *BookShelfMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 1)
-	if m.clearedbooks {
-		edges = append(edges, bookshelf.EdgeBooks)
+	if m.clearedrel_books {
+		edges = append(edges, bookshelf.EdgeRelBooks)
 	}
 	return edges
 }
@@ -1292,8 +1292,8 @@ func (m *BookShelfMutation) ClearedEdges() []string {
 // was cleared in this mutation.
 func (m *BookShelfMutation) EdgeCleared(name string) bool {
 	switch name {
-	case bookshelf.EdgeBooks:
-		return m.clearedbooks
+	case bookshelf.EdgeRelBooks:
+		return m.clearedrel_books
 	}
 	return false
 }
@@ -1310,8 +1310,8 @@ func (m *BookShelfMutation) ClearEdge(name string) error {
 // It returns an error if the edge is not defined in the schema.
 func (m *BookShelfMutation) ResetEdge(name string) error {
 	switch name {
-	case bookshelf.EdgeBooks:
-		m.ResetBooks()
+	case bookshelf.EdgeRelBooks:
+		m.ResetRelBooks()
 		return nil
 	}
 	return fmt.Errorf("unknown BookShelf edge %s", name)

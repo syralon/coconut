@@ -42,8 +42,7 @@ func (r *Roulette) Allocate(ctx context.Context) (int, error) {
 		return 0, err
 	}
 	r.leaseID = lease.ID
-	_, err = r.client.KeepAlive(ctx, lease.ID)
-	if err != nil {
+	if err = keepalive(ctx, r.client, lease.ID); err != nil {
 		return 0, err
 	}
 	for i := 1; i <= r.maxID; i++ {

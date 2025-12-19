@@ -5,3 +5,37 @@
 // +build !wireinject
 
 package main
+
+import (
+	"github.com/syralon/coconut"
+	"github.com/syralon/coconut/example/internal/config"
+	"github.com/syralon/coconut/example/internal/infra"
+	"github.com/syralon/coconut/example/internal/server"
+	"github.com/syralon/coconut/example/internal/service"
+)
+
+// Injectors from wire.go:
+
+func initialize(config2 *config.Config) (*coconut.App, func(), error) {
+	client, cleanup, err := infra.NewETCDClient(config2)
+	if err != nil {
+		return nil, nil, err
+	}
+	entClient, cleanup2, err := infra.NewEntClient(config2)
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+	services := service.NewServices(entClient)
+	servers := server.NewServers(config2, services)
+	app, err := newApp(client, servers)
+	if err != nil {
+		cleanup2()
+		cleanup()
+		return nil, nil, err
+	}
+	return app, func() {
+		cleanup2()
+		cleanup()
+	}, nil
+}

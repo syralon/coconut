@@ -37,20 +37,20 @@ type Book struct {
 
 // BookEdges holds the relations/edges for other nodes in the graph.
 type BookEdges struct {
-	// Shelves holds the value of the shelves edge.
-	Shelves []*BookShelf `json:"shelves,omitempty"`
+	// RelShelves holds the value of the rel_shelves edge.
+	RelShelves []*BookShelf `json:"rel_shelves,omitempty"`
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [1]bool
 }
 
-// ShelvesOrErr returns the Shelves value or an error if the edge
+// RelShelvesOrErr returns the RelShelves value or an error if the edge
 // was not loaded in eager-loading.
-func (e BookEdges) ShelvesOrErr() ([]*BookShelf, error) {
+func (e BookEdges) RelShelvesOrErr() ([]*BookShelf, error) {
 	if e.loadedTypes[0] {
-		return e.Shelves, nil
+		return e.RelShelves, nil
 	}
-	return nil, &NotLoadedError{edge: "shelves"}
+	return nil, &NotLoadedError{edge: "rel_shelves"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -134,9 +134,9 @@ func (_m *Book) Value(name string) (ent.Value, error) {
 	return _m.selectValues.Get(name)
 }
 
-// QueryShelves queries the "shelves" edge of the Book entity.
-func (_m *Book) QueryShelves() *BookShelfQuery {
-	return NewBookClient(_m.config).QueryShelves(_m)
+// QueryRelShelves queries the "rel_shelves" edge of the Book entity.
+func (_m *Book) QueryRelShelves() *BookShelfQuery {
+	return NewBookClient(_m.config).QueryRelShelves(_m)
 }
 
 // Update returns a builder for updating this Book.

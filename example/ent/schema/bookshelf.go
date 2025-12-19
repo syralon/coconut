@@ -27,6 +27,6 @@ func (BookShelf) Fields() []ent.Field {
 // Edges of the BookShelf.
 func (BookShelf) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.From("books", Book.Type).Ref("shelves"),
+		edge.From("rel_books", Book.Type).Ref("rel_shelves"),
 	}
 }

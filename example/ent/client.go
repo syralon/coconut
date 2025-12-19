@@ -315,15 +315,15 @@ func (c *BookClient) GetX(ctx context.Context, id int64) *Book {
 	return obj
 }
 
-// QueryShelves queries the shelves edge of a Book.
-func (c *BookClient) QueryShelves(_m *Book) *BookShelfQuery {
+// QueryRelShelves queries the rel_shelves edge of a Book.
+func (c *BookClient) QueryRelShelves(_m *Book) *BookShelfQuery {
 	query := (&BookShelfClient{config: c.config}).Query()
 	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
 		id := _m.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(book.Table, book.FieldID, id),
 			sqlgraph.To(bookshelf.Table, bookshelf.FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, false, book.ShelvesTable, book.ShelvesPrimaryKey...),
+			sqlgraph.Edge(sqlgraph.M2M, false, book.RelShelvesTable, book.RelShelvesPrimaryKey...),
 		)
 		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
 		return fromV, nil
@@ -464,15 +464,15 @@ func (c *BookShelfClient) GetX(ctx context.Context, id int64) *BookShelf {
 	return obj
 }
 
-// QueryBooks queries the books edge of a BookShelf.
-func (c *BookShelfClient) QueryBooks(_m *BookShelf) *BookQuery {
+// QueryRelBooks queries the rel_books edge of a BookShelf.
+func (c *BookShelfClient) QueryRelBooks(_m *BookShelf) *BookQuery {
 	query := (&BookClient{config: c.config}).Query()
 	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
 		id := _m.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(bookshelf.Table, bookshelf.FieldID, id),
 			sqlgraph.To(book.Table, book.FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, true, bookshelf.BooksTable, bookshelf.BooksPrimaryKey...),
+			sqlgraph.Edge(sqlgraph.M2M, true, bookshelf.RelBooksTable, bookshelf.RelBooksPrimaryKey...),
 		)
 		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
 		return fromV, nil

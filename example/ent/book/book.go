@@ -26,15 +26,15 @@ const (
 	FieldCreatedAt = "created_at"
 	// FieldUpdatedAt holds the string denoting the updated_at field in the database.
 	FieldUpdatedAt = "updated_at"
-	// EdgeShelves holds the string denoting the shelves edge name in mutations.
-	EdgeShelves = "shelves"
+	// EdgeRelShelves holds the string denoting the rel_shelves edge name in mutations.
+	EdgeRelShelves = "rel_shelves"
 	// Table holds the table name of the book in the database.
 	Table = "books"
-	// ShelvesTable is the table that holds the shelves relation/edge. The primary key declared below.
-	ShelvesTable = "book_shelves"
-	// ShelvesInverseTable is the table name for the BookShelf entity.
+	// RelShelvesTable is the table that holds the rel_shelves relation/edge. The primary key declared below.
+	RelShelvesTable = "book_rel_shelves"
+	// RelShelvesInverseTable is the table name for the BookShelf entity.
 	// It exists in this package in order to avoid circular dependency with the "bookshelf" package.
-	ShelvesInverseTable = "book_shelves"
+	RelShelvesInverseTable = "book_shelves"
 )
 
 // Columns holds all SQL columns for book fields.
@@ -49,9 +49,9 @@ var Columns = []string{
 }
 
 var (
-	// ShelvesPrimaryKey and ShelvesColumn2 are the table columns denoting the
-	// primary key for the shelves relation (M2M).
-	ShelvesPrimaryKey = []string{"book_id", "book_shelf_id"}
+	// RelShelvesPrimaryKey and RelShelvesColumn2 are the table columns denoting the
+	// primary key for the rel_shelves relation (M2M).
+	RelShelvesPrimaryKey = []string{"book_id", "book_shelf_id"}
 )
 
 // ValidColumn reports if the column name is valid (part of the table columns).
@@ -113,23 +113,23 @@ func ByUpdatedAt(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldUpdatedAt, opts...).ToFunc()
 }
 
-// ByShelvesCount orders the results by shelves count.
-func ByShelvesCount(opts ...sql.OrderTermOption) OrderOption {
+// ByRelShelvesCount orders the results by rel_shelves count.
+func ByRelShelvesCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborsCount(s, newShelvesStep(), opts...)
+		sqlgraph.OrderByNeighborsCount(s, newRelShelvesStep(), opts...)
 	}
 }
 
-// ByShelves orders the results by shelves terms.
-func ByShelves(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
+// ByRelShelves orders the results by rel_shelves terms.
+func ByRelShelves(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborTerms(s, newShelvesStep(), append([]sql.OrderTerm{term}, terms...)...)
+		sqlgraph.OrderByNeighborTerms(s, newRelShelvesStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
-func newShelvesStep() *sqlgraph.Step {
+func newRelShelvesStep() *sqlgraph.Step {
 	return sqlgraph.NewStep(
 		sqlgraph.From(Table, FieldID),
-		sqlgraph.To(ShelvesInverseTable, FieldID),
-		sqlgraph.Edge(sqlgraph.M2M, false, ShelvesTable, ShelvesPrimaryKey...),
+		sqlgraph.To(RelShelvesInverseTable, FieldID),
+		sqlgraph.Edge(sqlgraph.M2M, false, RelShelvesTable, RelShelvesPrimaryKey...),
 	)
 }
