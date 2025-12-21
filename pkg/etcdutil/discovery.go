@@ -16,6 +16,10 @@ type Discovery struct {
 	client *clientv3.Client
 }
 
+func NewDiscovery(client *clientv3.Client) *Discovery {
+	return &Discovery{client: client}
+}
+
 func (d *Discovery) Discover(ctx context.Context, name string) (mesh.Endpoints, error) {
 	em, err := endpoints.NewManager(d.client, name)
 	if err != nil {
