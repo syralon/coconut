@@ -10,5 +10,5 @@ github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/redis/go-redis/v9 v9.17.2 h1:P2EGsA4qVIM3Pp+aPocCJ7DguDHhqrXNhVcEp4ViluI=
 github.com/redis/go-redis/v9 v9.17.2/go.mod h1:u410H11HMLoB+TP67dz8rL9s6QW2j76l0//kSOd3370=
-github.com/syralon/coconut v0.0.0-20251219060518-9e63662bf3bf h1:M9n6wCtScundakDxBoA8xjusOaa+1LaS6ZpRnCLeUfQ=
-github.com/syralon/coconut v0.0.0-20251219060518-9e63662bf3bf/go.mod h1:3RKf6ppf7Ffjp7bUUkqfMNIAqIKGO09m5iMYYO77eak=
+github.com/syralon/coconut v0.0.0-20251222072655-3ecd7d8a95c8 h1:ZJs0yuwx1ectR7v4utv1OjjoUvR7i0DQujLMwLXq2mA=
+github.com/syralon/coconut v0.0.0-20251222072655-3ecd7d8a95c8/go.mod h1:d0Y9b48I4PgQ7C7jphGWNAnyf5P5UhPcFHtRruBOkvE=

@@ -8,7 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/google/wire v0.7.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
-	github.com/syralon/coconut v0.0.0-20251219060518-9e63662bf3bf
+	github.com/syralon/coconut v0.0.0-20251222072655-3ecd7d8a95c8
 	github.com/syralon/coconut/pkg/etcdutil v0.0.0-20251217102055-2837510c71e2
 	github.com/syralon/coconut/proto v0.0.0-20251215103104-97451600931a
 	github.com/syralon/snowflake v0.0.0-20251126030518-38724ee4d165

@@ -8,12 +8,12 @@ import (
 )
 
 // LibraryBusiness
-// just a business example, has no meaning.
+// a business example
 type LibraryBusiness struct {
-	rep repository.TxRepository
+	rep repository.Tx
 }
 
-func NewLibraryBusiness(rep repository.TxRepository) *LibraryBusiness {
+func NewLibraryBusiness(rep repository.Tx) *LibraryBusiness {
 	return &LibraryBusiness{rep: rep}
 }
 

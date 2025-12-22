@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/syralon/coconut v0.0.0-20251219060518-9e63662bf3bf
+	github.com/syralon/coconut v0.0.0-20251222072655-3ecd7d8a95c8
 	go.etcd.io/etcd/client/v3 v3.6.6
 	sigs.k8s.io/yaml v1.6.0
 )
