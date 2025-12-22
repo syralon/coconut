@@ -7,12 +7,8 @@ import (
 	"github.com/syralon/coconut/example/proto/syralon/example"
 )
 
-type createController struct {
-	*Controller
-}
-
-func (c *createController) Create(ctx context.Context, request *example.CreateBookRequest) (*example.CreateBookResponse, error) {
-	data, err := c.rep.Create(ctx, request.GetCreate())
+func (s *BookService) Create(ctx context.Context, request *example.CreateBookRequest) (*example.CreateBookResponse, error) {
+	data, err := s.rep.Create(ctx, request.GetCreate())
 	if err != nil {
 		return nil, err
 	}

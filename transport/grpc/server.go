@@ -29,8 +29,13 @@ type Server struct {
 
 func NewServer(c *Config) *Server {
 	s := &Server{
-		c:        c,
-		endpoint: c.Endpoint(),
+		c:                  c,
+		endpoint:           c.Endpoint(),
+		unaryInterceptors:  c.Interceptors.UnaryServerInterceptors(),
+		streamInterceptors: c.Interceptors.StreamServerInterceptors(),
+	}
+	if c.OTEL {
+		s.options = append(s.options, grpc.StatsHandler(otelgrpc.NewServerHandler()))
 	}
 	s.endpoint.Scheme = mesh.GRPC
 	return s
@@ -92,6 +97,9 @@ func (s *Server) WithMetadata(md mesh.Metadata) *Server {
 }
 
 func (s *Server) WithOTELHandler(options ...otelgrpc.Option) {
+	if s.c.OTEL { // avoid repeated handler
+		return
+	}
 	s.options = append(s.options, grpc.StatsHandler(otelgrpc.NewServerHandler(options...)))
 }
 

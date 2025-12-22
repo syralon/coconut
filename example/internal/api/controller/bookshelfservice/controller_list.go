@@ -8,12 +8,8 @@ import (
 	"github.com/syralon/coconut/toolkit/xslices"
 )
 
-type listController struct {
-	*Controller
-}
-
-func (c *listController) List(ctx context.Context, request *example.ListBookShelfRequest) (*example.ListBookShelfResponse, error) {
-	data, paginator, err := c.rep.List(ctx, request.GetOptions(), request.GetPaginator())
+func (s *BookShelfService) List(ctx context.Context, request *example.ListBookShelfRequest) (*example.ListBookShelfResponse, error) {
+	data, paginator, err := s.rep.List(ctx, request.GetOptions(), request.GetPaginator())
 	if err != nil {
 		return nil, err
 	}

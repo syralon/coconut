@@ -2,16 +2,21 @@ package grpc
 
 import (
 	"github.com/syralon/coconut/transport/common"
+	"github.com/syralon/coconut/transport/grpc/interceptor"
 	"google.golang.org/grpc"
 )
 
 type Config struct {
 	common.Config
+	OTEL         bool                `json:"otel"         yaml:"otel"`
+	Interceptors *interceptor.Config `json:"interceptors" yaml:"interceptors"`
 }
 
 type ClientConfig struct {
-	Target string `json:"target"  yaml:"target"`
-	Secure bool   `json:"secure"  yaml:"secure"`
+	Target       string              `json:"target"       yaml:"target"`
+	Secure       bool                `json:"secure"       yaml:"secure"`
+	OTEL         bool                `json:"otel"         yaml:"otel"`
+	Interceptors *interceptor.Config `json:"interceptors" yaml:"interceptors"`
 }
 
 type ServiceClientConfig[T any] struct {

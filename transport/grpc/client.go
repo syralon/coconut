@@ -1,6 +1,7 @@
 package grpc
 
 import (
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -31,10 +32,18 @@ func (c *Connector) NewClient(config *ClientConfig, opts ...grpc.DialOption) (*g
 	if cc, ok := c.clients[config.Target]; ok {
 		return cc, nil
 	}
+	var defaultOpts []grpc.DialOption
 	if !config.Secure {
-		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+		defaultOpts = append(defaultOpts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	}
-	cc, err := NewClient(config, opts...)
+	if config.OTEL {
+		defaultOpts = append(defaultOpts, grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+	}
+	if config.Interceptors != nil {
+		defaultOpts = append(defaultOpts, grpc.WithChainUnaryInterceptor(config.Interceptors.UnaryClientInterceptors()...))
+		defaultOpts = append(defaultOpts, grpc.WithChainStreamInterceptor(config.Interceptors.StreamClientInterceptors()...))
+	}
+	cc, err := NewClient(config, append(defaultOpts, opts...)...)
 	if err != nil {
 		return nil, err
 	}
