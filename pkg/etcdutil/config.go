@@ -22,3 +22,7 @@ func (c *Config) Config() clientv3.Config {
 func (c *Config) NewClient() (*clientv3.Client, error) {
 	return clientv3.New(c.Config())
 }
+
+func NewClient(c *Config) (*clientv3.Client, error) {
+	return c.NewClient()
+}

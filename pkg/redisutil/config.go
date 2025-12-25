@@ -88,6 +88,10 @@ type Config struct {
 }
 
 func NewClient(c *Config) (redis.UniversalClient, error) {
+	return c.NewClient()
+}
+
+func (c *Config) NewClient() (redis.UniversalClient, error) {
 	client := redis.NewUniversalClient(&redis.UniversalOptions{
 		Addrs:                 c.Addrs,
 		ClientName:            c.ClientName,
