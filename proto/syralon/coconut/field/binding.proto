@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package syralon.coconut.field;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/syralon/coconut/proto/syralon/coconut/field;field";
+
+message Binding {
+  string header = 1;
+}
+
+extend google.protobuf.FieldOptions {
+  Binding binding = 2047;
+}
+
+message Example {
+  string client_id = 1[(binding).header="X-Client-Id"];
+  repeated int32 ids = 2[(binding).header="X-Ids"];
+}
