@@ -347,51 +347,6 @@ func (x *DoubleList) GetList() []float64 {
 	return nil
 }
 
-type BoolList struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	List []bool `protobuf:"varint,1,rep,packed,name=list,proto3" json:"list,omitempty"`
-}
-
-func (x *BoolList) Reset() {
-	*x = BoolList{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BoolList) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BoolList) ProtoMessage() {}
-
-func (x *BoolList) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BoolList.ProtoReflect.Descriptor instead.
-func (*BoolList) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *BoolList) GetList() []bool {
-	if x != nil {
-		return x.List
-	}
-	return nil
-}
-
 type StringList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -402,7 +357,7 @@ type StringList struct {
 
 func (x *StringList) Reset() {
 	*x = StringList{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[7]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -414,7 +369,7 @@ func (x *StringList) String() string {
 func (*StringList) ProtoMessage() {}
 
 func (x *StringList) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[7]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -427,7 +382,7 @@ func (x *StringList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringList.ProtoReflect.Descriptor instead.
 func (*StringList) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{7}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *StringList) GetList() []string {
@@ -447,7 +402,7 @@ type TimestampList struct {
 
 func (x *TimestampList) Reset() {
 	*x = TimestampList{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[8]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +414,7 @@ func (x *TimestampList) String() string {
 func (*TimestampList) ProtoMessage() {}
 
 func (x *TimestampList) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[8]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +427,7 @@ func (x *TimestampList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimestampList.ProtoReflect.Descriptor instead.
 func (*TimestampList) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{8}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TimestampList) GetList() []*timestamppb.Timestamp {
@@ -492,7 +447,7 @@ type DurationList struct {
 
 func (x *DurationList) Reset() {
 	*x = DurationList{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[9]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -504,7 +459,7 @@ func (x *DurationList) String() string {
 func (*DurationList) ProtoMessage() {}
 
 func (x *DurationList) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[9]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -517,7 +472,7 @@ func (x *DurationList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DurationList.ProtoReflect.Descriptor instead.
 func (*DurationList) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{9}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DurationList) GetList() []*durationpb.Duration {
@@ -537,7 +492,7 @@ type BytesList struct {
 
 func (x *BytesList) Reset() {
 	*x = BytesList{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[10]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -549,7 +504,7 @@ func (x *BytesList) String() string {
 func (*BytesList) ProtoMessage() {}
 
 func (x *BytesList) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[10]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -562,7 +517,7 @@ func (x *BytesList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BytesList.ProtoReflect.Descriptor instead.
 func (*BytesList) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{10}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BytesList) GetList() [][]byte {
@@ -593,7 +548,7 @@ type Int32Field struct {
 
 func (x *Int32Field) Reset() {
 	*x = Int32Field{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[11]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -605,7 +560,7 @@ func (x *Int32Field) String() string {
 func (*Int32Field) ProtoMessage() {}
 
 func (x *Int32Field) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[11]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -618,7 +573,7 @@ func (x *Int32Field) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Int32Field.ProtoReflect.Descriptor instead.
 func (*Int32Field) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{11}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{10}
 }
 
 func (m *Int32Field) GetOperator() isInt32Field_Operator {
@@ -770,7 +725,7 @@ type Int64Field struct {
 
 func (x *Int64Field) Reset() {
 	*x = Int64Field{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[12]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -782,7 +737,7 @@ func (x *Int64Field) String() string {
 func (*Int64Field) ProtoMessage() {}
 
 func (x *Int64Field) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[12]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -795,7 +750,7 @@ func (x *Int64Field) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Int64Field.ProtoReflect.Descriptor instead.
 func (*Int64Field) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{12}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{11}
 }
 
 func (m *Int64Field) GetOperator() isInt64Field_Operator {
@@ -947,7 +902,7 @@ type Uint32Field struct {
 
 func (x *Uint32Field) Reset() {
 	*x = Uint32Field{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[13]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -959,7 +914,7 @@ func (x *Uint32Field) String() string {
 func (*Uint32Field) ProtoMessage() {}
 
 func (x *Uint32Field) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[13]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -972,7 +927,7 @@ func (x *Uint32Field) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Uint32Field.ProtoReflect.Descriptor instead.
 func (*Uint32Field) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{13}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{12}
 }
 
 func (m *Uint32Field) GetOperator() isUint32Field_Operator {
@@ -1124,7 +1079,7 @@ type Uint64Field struct {
 
 func (x *Uint64Field) Reset() {
 	*x = Uint64Field{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[14]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1136,7 +1091,7 @@ func (x *Uint64Field) String() string {
 func (*Uint64Field) ProtoMessage() {}
 
 func (x *Uint64Field) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[14]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1149,7 +1104,7 @@ func (x *Uint64Field) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Uint64Field.ProtoReflect.Descriptor instead.
 func (*Uint64Field) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{14}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{13}
 }
 
 func (m *Uint64Field) GetOperator() isUint64Field_Operator {
@@ -1301,7 +1256,7 @@ type FloatField struct {
 
 func (x *FloatField) Reset() {
 	*x = FloatField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[15]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1313,7 +1268,7 @@ func (x *FloatField) String() string {
 func (*FloatField) ProtoMessage() {}
 
 func (x *FloatField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[15]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1326,7 +1281,7 @@ func (x *FloatField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FloatField.ProtoReflect.Descriptor instead.
 func (*FloatField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{15}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{14}
 }
 
 func (m *FloatField) GetOperator() isFloatField_Operator {
@@ -1478,7 +1433,7 @@ type DoubleField struct {
 
 func (x *DoubleField) Reset() {
 	*x = DoubleField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[16]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1490,7 +1445,7 @@ func (x *DoubleField) String() string {
 func (*DoubleField) ProtoMessage() {}
 
 func (x *DoubleField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[16]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1503,7 +1458,7 @@ func (x *DoubleField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DoubleField.ProtoReflect.Descriptor instead.
 func (*DoubleField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{16}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{15}
 }
 
 func (m *DoubleField) GetOperator() isDoubleField_Operator {
@@ -1639,16 +1594,12 @@ type BoolField struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Types that are assignable to Operator:
-	//
-	//	*BoolField_Eq
-	//	*BoolField_Ne
-	Operator isBoolField_Operator `protobuf_oneof:"operator"`
+	Eq bool `protobuf:"varint,1,opt,name=eq,proto3" json:"eq,omitempty"`
 }
 
 func (x *BoolField) Reset() {
 	*x = BoolField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[17]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1660,7 +1611,7 @@ func (x *BoolField) String() string {
 func (*BoolField) ProtoMessage() {}
 
 func (x *BoolField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[17]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1673,45 +1624,15 @@ func (x *BoolField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BoolField.ProtoReflect.Descriptor instead.
 func (*BoolField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{17}
-}
-
-func (m *BoolField) GetOperator() isBoolField_Operator {
-	if m != nil {
-		return m.Operator
-	}
-	return nil
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *BoolField) GetEq() bool {
-	if x, ok := x.GetOperator().(*BoolField_Eq); ok {
+	if x != nil {
 		return x.Eq
 	}
 	return false
 }
-
-func (x *BoolField) GetNe() bool {
-	if x, ok := x.GetOperator().(*BoolField_Ne); ok {
-		return x.Ne
-	}
-	return false
-}
-
-type isBoolField_Operator interface {
-	isBoolField_Operator()
-}
-
-type BoolField_Eq struct {
-	Eq bool `protobuf:"varint,1,opt,name=eq,proto3,oneof"`
-}
-
-type BoolField_Ne struct {
-	Ne bool `protobuf:"varint,2,opt,name=ne,proto3,oneof"`
-}
-
-func (*BoolField_Eq) isBoolField_Operator() {}
-
-func (*BoolField_Ne) isBoolField_Operator() {}
 
 type StringField struct {
 	state         protoimpl.MessageState
@@ -1739,7 +1660,7 @@ type StringField struct {
 
 func (x *StringField) Reset() {
 	*x = StringField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[18]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1751,7 +1672,7 @@ func (x *StringField) String() string {
 func (*StringField) ProtoMessage() {}
 
 func (x *StringField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[18]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1764,7 +1685,7 @@ func (x *StringField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringField.ProtoReflect.Descriptor instead.
 func (*StringField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{18}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{17}
 }
 
 func (m *StringField) GetOperator() isStringField_Operator {
@@ -1979,7 +1900,7 @@ type TimestampField struct {
 
 func (x *TimestampField) Reset() {
 	*x = TimestampField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[19]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1991,7 +1912,7 @@ func (x *TimestampField) String() string {
 func (*TimestampField) ProtoMessage() {}
 
 func (x *TimestampField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[19]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2004,7 +1925,7 @@ func (x *TimestampField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimestampField.ProtoReflect.Descriptor instead.
 func (*TimestampField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{19}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{18}
 }
 
 func (m *TimestampField) GetOperator() isTimestampField_Operator {
@@ -2129,7 +2050,7 @@ type DurationField struct {
 
 func (x *DurationField) Reset() {
 	*x = DurationField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[20]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2141,7 +2062,7 @@ func (x *DurationField) String() string {
 func (*DurationField) ProtoMessage() {}
 
 func (x *DurationField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[20]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2154,7 +2075,7 @@ func (x *DurationField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DurationField.ProtoReflect.Descriptor instead.
 func (*DurationField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{20}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DurationField) GetPrecision() PRECISION {
@@ -2280,7 +2201,7 @@ type BytesField struct {
 
 func (x *BytesField) Reset() {
 	*x = BytesField{}
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[21]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2292,7 +2213,7 @@ func (x *BytesField) String() string {
 func (*BytesField) ProtoMessage() {}
 
 func (x *BytesField) ProtoReflect() protoreflect.Message {
-	mi := &file_syralon_coconut_field_field_proto_msgTypes[21]
+	mi := &file_syralon_coconut_field_field_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2305,7 +2226,7 @@ func (x *BytesField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BytesField.ProtoReflect.Descriptor instead.
 func (*BytesField) Descriptor() ([]byte, []int) {
-	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{21}
+	return file_syralon_coconut_field_field_proto_rawDescGZIP(), []int{20}
 }
 
 func (m *BytesField) GetOperator() isBytesField_Operator {
@@ -2368,8 +2289,6 @@ var file_syralon_coconut_field_field_proto_rawDesc = []byte{
 	0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x02, 0x52, 0x04, 0x6c, 0x69,
 	0x73, 0x74, 0x22, 0x20, 0x0a, 0x0a, 0x44, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74,
 	0x12, 0x12, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x01, 0x52, 0x04,
-	0x6c, 0x69, 0x73, 0x74, 0x22, 0x1e, 0x0a, 0x08, 0x42, 0x6f, 0x6f, 0x6c, 0x4c, 0x69, 0x73, 0x74,
-	0x12, 0x12, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x08, 0x52, 0x04,
 	0x6c, 0x69, 0x73, 0x74, 0x22, 0x20, 0x0a, 0x0a, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x4c, 0x69,
 	0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09,
 	0x52, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x22, 0x3f, 0x0a, 0x0d, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
@@ -2500,10 +2419,8 @@ var file_syralon_coconut_field_field_proto_rawDesc = []byte{
 	0x72, 0x61, 0x6c, 0x6f, 0x6e, 0x2e, 0x63, 0x6f, 0x63, 0x6f, 0x6e, 0x75, 0x74, 0x2e, 0x66, 0x69,
 	0x65, 0x6c, 0x64, 0x2e, 0x44, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x48, 0x00,
 	0x52, 0x05, 0x6e, 0x6f, 0x74, 0x49, 0x6e, 0x42, 0x0a, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x6f, 0x72, 0x22, 0x3b, 0x0a, 0x09, 0x42, 0x6f, 0x6f, 0x6c, 0x46, 0x69, 0x65, 0x6c, 0x64,
-	0x12, 0x10, 0x0a, 0x02, 0x65, 0x71, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x48, 0x00, 0x52, 0x02,
-	0x65, 0x71, 0x12, 0x10, 0x0a, 0x02, 0x6e, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x48, 0x00,
-	0x52, 0x02, 0x6e, 0x65, 0x42, 0x0a, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72,
+	0x74, 0x6f, 0x72, 0x22, 0x1b, 0x0a, 0x09, 0x42, 0x6f, 0x6f, 0x6c, 0x46, 0x69, 0x65, 0x6c, 0x64,
+	0x12, 0x0e, 0x0a, 0x02, 0x65, 0x71, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x02, 0x65, 0x71,
 	0x22, 0xca, 0x03, 0x0a, 0x0b, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x46, 0x69, 0x65, 0x6c, 0x64,
 	0x12, 0x10, 0x0a, 0x02, 0x65, 0x71, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x02,
 	0x65, 0x71, 0x12, 0x10, 0x0a, 0x02, 0x6e, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00,
@@ -2612,7 +2529,7 @@ func file_syralon_coconut_field_field_proto_rawDescGZIP() []byte {
 }
 
 var file_syralon_coconut_field_field_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_syralon_coconut_field_field_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_syralon_coconut_field_field_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_syralon_coconut_field_field_proto_goTypes = []any{
 	(PRECISION)(0),                // 0: syralon.coconut.field.PRECISION
 	(*Int32List)(nil),             // 1: syralon.coconut.field.Int32List
@@ -2621,28 +2538,27 @@ var file_syralon_coconut_field_field_proto_goTypes = []any{
 	(*Uint64List)(nil),            // 4: syralon.coconut.field.Uint64List
 	(*FloatList)(nil),             // 5: syralon.coconut.field.FloatList
 	(*DoubleList)(nil),            // 6: syralon.coconut.field.DoubleList
-	(*BoolList)(nil),              // 7: syralon.coconut.field.BoolList
-	(*StringList)(nil),            // 8: syralon.coconut.field.StringList
-	(*TimestampList)(nil),         // 9: syralon.coconut.field.TimestampList
-	(*DurationList)(nil),          // 10: syralon.coconut.field.DurationList
-	(*BytesList)(nil),             // 11: syralon.coconut.field.BytesList
-	(*Int32Field)(nil),            // 12: syralon.coconut.field.Int32Field
-	(*Int64Field)(nil),            // 13: syralon.coconut.field.Int64Field
-	(*Uint32Field)(nil),           // 14: syralon.coconut.field.Uint32Field
-	(*Uint64Field)(nil),           // 15: syralon.coconut.field.Uint64Field
-	(*FloatField)(nil),            // 16: syralon.coconut.field.FloatField
-	(*DoubleField)(nil),           // 17: syralon.coconut.field.DoubleField
-	(*BoolField)(nil),             // 18: syralon.coconut.field.BoolField
-	(*StringField)(nil),           // 19: syralon.coconut.field.StringField
-	(*TimestampField)(nil),        // 20: syralon.coconut.field.TimestampField
-	(*DurationField)(nil),         // 21: syralon.coconut.field.DurationField
-	(*BytesField)(nil),            // 22: syralon.coconut.field.BytesField
-	(*timestamppb.Timestamp)(nil), // 23: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),   // 24: google.protobuf.Duration
+	(*StringList)(nil),            // 7: syralon.coconut.field.StringList
+	(*TimestampList)(nil),         // 8: syralon.coconut.field.TimestampList
+	(*DurationList)(nil),          // 9: syralon.coconut.field.DurationList
+	(*BytesList)(nil),             // 10: syralon.coconut.field.BytesList
+	(*Int32Field)(nil),            // 11: syralon.coconut.field.Int32Field
+	(*Int64Field)(nil),            // 12: syralon.coconut.field.Int64Field
+	(*Uint32Field)(nil),           // 13: syralon.coconut.field.Uint32Field
+	(*Uint64Field)(nil),           // 14: syralon.coconut.field.Uint64Field
+	(*FloatField)(nil),            // 15: syralon.coconut.field.FloatField
+	(*DoubleField)(nil),           // 16: syralon.coconut.field.DoubleField
+	(*BoolField)(nil),             // 17: syralon.coconut.field.BoolField
+	(*StringField)(nil),           // 18: syralon.coconut.field.StringField
+	(*TimestampField)(nil),        // 19: syralon.coconut.field.TimestampField
+	(*DurationField)(nil),         // 20: syralon.coconut.field.DurationField
+	(*BytesField)(nil),            // 21: syralon.coconut.field.BytesField
+	(*timestamppb.Timestamp)(nil), // 22: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),   // 23: google.protobuf.Duration
 }
 var file_syralon_coconut_field_field_proto_depIdxs = []int32{
-	23, // 0: syralon.coconut.field.TimestampList.list:type_name -> google.protobuf.Timestamp
-	24, // 1: syralon.coconut.field.DurationList.list:type_name -> google.protobuf.Duration
+	22, // 0: syralon.coconut.field.TimestampList.list:type_name -> google.protobuf.Timestamp
+	23, // 1: syralon.coconut.field.DurationList.list:type_name -> google.protobuf.Duration
 	1,  // 2: syralon.coconut.field.Int32Field.between:type_name -> syralon.coconut.field.Int32List
 	1,  // 3: syralon.coconut.field.Int32Field.in:type_name -> syralon.coconut.field.Int32List
 	1,  // 4: syralon.coconut.field.Int32Field.not_in:type_name -> syralon.coconut.field.Int32List
@@ -2661,24 +2577,24 @@ var file_syralon_coconut_field_field_proto_depIdxs = []int32{
 	6,  // 17: syralon.coconut.field.DoubleField.between:type_name -> syralon.coconut.field.DoubleList
 	6,  // 18: syralon.coconut.field.DoubleField.in:type_name -> syralon.coconut.field.DoubleList
 	6,  // 19: syralon.coconut.field.DoubleField.not_in:type_name -> syralon.coconut.field.DoubleList
-	8,  // 20: syralon.coconut.field.StringField.between:type_name -> syralon.coconut.field.StringList
-	8,  // 21: syralon.coconut.field.StringField.in:type_name -> syralon.coconut.field.StringList
-	8,  // 22: syralon.coconut.field.StringField.not_in:type_name -> syralon.coconut.field.StringList
-	23, // 23: syralon.coconut.field.TimestampField.eq:type_name -> google.protobuf.Timestamp
-	23, // 24: syralon.coconut.field.TimestampField.ne:type_name -> google.protobuf.Timestamp
-	23, // 25: syralon.coconut.field.TimestampField.gt:type_name -> google.protobuf.Timestamp
-	23, // 26: syralon.coconut.field.TimestampField.gte:type_name -> google.protobuf.Timestamp
-	23, // 27: syralon.coconut.field.TimestampField.lt:type_name -> google.protobuf.Timestamp
-	23, // 28: syralon.coconut.field.TimestampField.lte:type_name -> google.protobuf.Timestamp
-	9,  // 29: syralon.coconut.field.TimestampField.between:type_name -> syralon.coconut.field.TimestampList
+	7,  // 20: syralon.coconut.field.StringField.between:type_name -> syralon.coconut.field.StringList
+	7,  // 21: syralon.coconut.field.StringField.in:type_name -> syralon.coconut.field.StringList
+	7,  // 22: syralon.coconut.field.StringField.not_in:type_name -> syralon.coconut.field.StringList
+	22, // 23: syralon.coconut.field.TimestampField.eq:type_name -> google.protobuf.Timestamp
+	22, // 24: syralon.coconut.field.TimestampField.ne:type_name -> google.protobuf.Timestamp
+	22, // 25: syralon.coconut.field.TimestampField.gt:type_name -> google.protobuf.Timestamp
+	22, // 26: syralon.coconut.field.TimestampField.gte:type_name -> google.protobuf.Timestamp
+	22, // 27: syralon.coconut.field.TimestampField.lt:type_name -> google.protobuf.Timestamp
+	22, // 28: syralon.coconut.field.TimestampField.lte:type_name -> google.protobuf.Timestamp
+	8,  // 29: syralon.coconut.field.TimestampField.between:type_name -> syralon.coconut.field.TimestampList
 	0,  // 30: syralon.coconut.field.DurationField.precision:type_name -> syralon.coconut.field.PRECISION
-	24, // 31: syralon.coconut.field.DurationField.eq:type_name -> google.protobuf.Duration
-	24, // 32: syralon.coconut.field.DurationField.ne:type_name -> google.protobuf.Duration
-	24, // 33: syralon.coconut.field.DurationField.gt:type_name -> google.protobuf.Duration
-	24, // 34: syralon.coconut.field.DurationField.gte:type_name -> google.protobuf.Duration
-	24, // 35: syralon.coconut.field.DurationField.lt:type_name -> google.protobuf.Duration
-	24, // 36: syralon.coconut.field.DurationField.lte:type_name -> google.protobuf.Duration
-	10, // 37: syralon.coconut.field.DurationField.between:type_name -> syralon.coconut.field.DurationList
+	23, // 31: syralon.coconut.field.DurationField.eq:type_name -> google.protobuf.Duration
+	23, // 32: syralon.coconut.field.DurationField.ne:type_name -> google.protobuf.Duration
+	23, // 33: syralon.coconut.field.DurationField.gt:type_name -> google.protobuf.Duration
+	23, // 34: syralon.coconut.field.DurationField.gte:type_name -> google.protobuf.Duration
+	23, // 35: syralon.coconut.field.DurationField.lt:type_name -> google.protobuf.Duration
+	23, // 36: syralon.coconut.field.DurationField.lte:type_name -> google.protobuf.Duration
+	9,  // 37: syralon.coconut.field.DurationField.between:type_name -> syralon.coconut.field.DurationList
 	38, // [38:38] is the sub-list for method output_type
 	38, // [38:38] is the sub-list for method input_type
 	38, // [38:38] is the sub-list for extension type_name
@@ -2691,7 +2607,7 @@ func file_syralon_coconut_field_field_proto_init() {
 	if File_syralon_coconut_field_field_proto != nil {
 		return
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[11].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[10].OneofWrappers = []any{
 		(*Int32Field_Eq)(nil),
 		(*Int32Field_Ne)(nil),
 		(*Int32Field_Gt)(nil),
@@ -2702,7 +2618,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*Int32Field_In)(nil),
 		(*Int32Field_NotIn)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[12].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[11].OneofWrappers = []any{
 		(*Int64Field_Eq)(nil),
 		(*Int64Field_Ne)(nil),
 		(*Int64Field_Gt)(nil),
@@ -2713,7 +2629,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*Int64Field_In)(nil),
 		(*Int64Field_NotIn)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[13].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[12].OneofWrappers = []any{
 		(*Uint32Field_Eq)(nil),
 		(*Uint32Field_Ne)(nil),
 		(*Uint32Field_Gt)(nil),
@@ -2724,7 +2640,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*Uint32Field_In)(nil),
 		(*Uint32Field_NotIn)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[14].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[13].OneofWrappers = []any{
 		(*Uint64Field_Eq)(nil),
 		(*Uint64Field_Ne)(nil),
 		(*Uint64Field_Gt)(nil),
@@ -2735,7 +2651,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*Uint64Field_In)(nil),
 		(*Uint64Field_NotIn)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[15].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[14].OneofWrappers = []any{
 		(*FloatField_Eq)(nil),
 		(*FloatField_Ne)(nil),
 		(*FloatField_Gt)(nil),
@@ -2746,7 +2662,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*FloatField_In)(nil),
 		(*FloatField_NotIn)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[16].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[15].OneofWrappers = []any{
 		(*DoubleField_Eq)(nil),
 		(*DoubleField_Ne)(nil),
 		(*DoubleField_Gt)(nil),
@@ -2758,10 +2674,6 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*DoubleField_NotIn)(nil),
 	}
 	file_syralon_coconut_field_field_proto_msgTypes[17].OneofWrappers = []any{
-		(*BoolField_Eq)(nil),
-		(*BoolField_Ne)(nil),
-	}
-	file_syralon_coconut_field_field_proto_msgTypes[18].OneofWrappers = []any{
 		(*StringField_Eq)(nil),
 		(*StringField_Ne)(nil),
 		(*StringField_Gt)(nil),
@@ -2777,7 +2689,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*StringField_HasSuffix)(nil),
 		(*StringField_Like)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[19].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[18].OneofWrappers = []any{
 		(*TimestampField_Eq)(nil),
 		(*TimestampField_Ne)(nil),
 		(*TimestampField_Gt)(nil),
@@ -2786,7 +2698,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*TimestampField_Lte)(nil),
 		(*TimestampField_Between)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[20].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[19].OneofWrappers = []any{
 		(*DurationField_Eq)(nil),
 		(*DurationField_Ne)(nil),
 		(*DurationField_Gt)(nil),
@@ -2795,7 +2707,7 @@ func file_syralon_coconut_field_field_proto_init() {
 		(*DurationField_Lte)(nil),
 		(*DurationField_Between)(nil),
 	}
-	file_syralon_coconut_field_field_proto_msgTypes[21].OneofWrappers = []any{
+	file_syralon_coconut_field_field_proto_msgTypes[20].OneofWrappers = []any{
 		(*BytesField_Eq)(nil),
 		(*BytesField_Ne)(nil),
 	}
@@ -2805,7 +2717,7 @@ func file_syralon_coconut_field_field_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_syralon_coconut_field_field_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   22,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

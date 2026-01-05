@@ -4,6 +4,8 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
+	"google.golang.org/protobuf/types/known/durationpb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // Call the function if the val is not nil.
@@ -255,14 +257,7 @@ func (f *BoolField) Selector(column string) []func(*sql.Selector) {
 	if f == nil {
 		return nil
 	}
-	switch v := f.GetOperator().(type) {
-	case *BoolField_Eq:
-		return []func(*sql.Selector){sql.FieldEQ(column, v.Eq)}
-	case *BoolField_Ne:
-		return []func(*sql.Selector){sql.FieldNEQ(column, v.Ne)}
-	default:
-		return nil
-	}
+	return []func(*sql.Selector){sql.FieldEQ(column, f.Eq)}
 }
 
 func (f *DurationField) Selector(column string) []func(*sql.Selector) {
@@ -462,4 +457,42 @@ func (f BytesFieldList) Selector(column string) []func(selector *sql.Selector) {
 		selectors = append(selectors, v.Selector(column)...)
 	}
 	return selectors
+}
+
+func NewInt64(i int64) *Int64Field {
+	return &Int64Field{Operator: &Int64Field_Eq{Eq: i}}
+}
+
+func NewInt32(i int32) *Int32Field {
+	return &Int32Field{Operator: &Int32Field_Eq{Eq: i}}
+}
+
+func NewUint64(i uint64) *Uint64Field {
+	return &Uint64Field{Operator: &Uint64Field_Eq{Eq: i}}
+}
+
+func NewUint32(i uint32) *Uint32Field {
+	return &Uint32Field{Operator: &Uint32Field_Eq{Eq: i}}
+}
+
+func NewString(s string) *StringField {
+	return &StringField{Operator: &StringField_Eq{Eq: s}}
+}
+
+func NewBool(b bool) *BoolField { return &BoolField{Eq: b} }
+
+func NewFloat(f float32) *FloatField {
+	return &FloatField{Operator: &FloatField_Eq{Eq: f}}
+}
+
+func NewDouble(f float64) *DoubleField {
+	return &DoubleField{Operator: &DoubleField_Eq{Eq: f}}
+}
+
+func NewTimestamp(t time.Time) *TimestampField {
+	return &TimestampField{Operator: &TimestampField_Eq{Eq: timestamppb.New(t)}}
+}
+
+func NewDuration(d time.Duration) *DurationField {
+	return &DurationField{Operator: &DurationField_Eq{Eq: durationpb.New(d)}}
 }

@@ -31,10 +31,6 @@ message DoubleList {
   repeated double list = 1;
 }
 
-message BoolList {
-  repeated bool list = 1;
-}
-
 message StringList {
   repeated string list = 1;
 }
@@ -136,10 +132,7 @@ message DoubleField {
 }
 
 message BoolField {
-  oneof operator {
-    bool eq = 1;
-    bool ne = 2;
-  }
+  bool eq = 1;
 }
 
 message StringField {
