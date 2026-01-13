@@ -78,3 +78,11 @@ func Read(ctx context.Context, v any, opts ...Option) error {
 func ReadBytes(ctx context.Context, opts ...Option) ([]byte, error) {
 	return NewManager(opts...).ReadBytes(ctx)
 }
+
+func ReadT[T any](ctx context.Context, opts ...Option) (*T, error) {
+	t := new(T)
+	if err := Read(ctx, t, opts...); err != nil {
+		return nil, err
+	}
+	return t, nil
+}
