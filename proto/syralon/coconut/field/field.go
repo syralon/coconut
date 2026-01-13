@@ -16,6 +16,13 @@ func Call[T any](fn func(T), val *T) {
 	fn(*val)
 }
 
+func CallTimestamp(fn func(tim time.Time), val *timestamppb.Timestamp) {
+	if val == nil {
+		return
+	}
+	fn(val.AsTime())
+}
+
 func Selectors[T ~func(*sql.Selector)](data ...[]func(*sql.Selector)) []T {
 	t := make([]T, 0, len(data))
 	for _, selectors := range data {

@@ -19,6 +19,10 @@ type Content struct {
 
 type Reader interface {
 	Read(ctx context.Context, key string) ([]byte, error)
+}
+
+type ReadWatcher interface {
+	Reader
 	Watch(ctx context.Context, key string) (<-chan *Content, error)
 }
 

@@ -3,6 +3,7 @@ package data
 import (
 	"context"
 
+	"entgo.io/ent/dialect/sql"
 	"github.com/syralon/coconut/example/ent"
 	"github.com/syralon/coconut/example/ent/bookshelf"
 	"github.com/syralon/coconut/example/ent/predicate"
@@ -58,7 +59,7 @@ func (rep *BookShelfRepository) List(ctx context.Context, options *example.BookS
 				Offset(int(page.Classical.GetLimit() * (page.Classical.GetPage() - 1))).
 				Limit(int(page.Classical.GetLimit()))
 		case *field.Paginator_Infinite:
-			query = query.Order(bookshelf.ByID()).
+			query = query.Order(bookshelf.ByID(sql.OrderDesc())).
 				Limit(int(page.Infinite.GetLimit()))
 			if sequence := page.Infinite.GetSequence(); sequence > 0 {
 				query = query.Where(bookshelf.IDLT(page.Infinite.GetSequence()))

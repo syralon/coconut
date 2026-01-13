@@ -6,5 +6,5 @@ import (
 
 type Config struct {
 	common.HTTPConfig
-	Endpoint string
+	Endpoint string `json:"endpoint" yaml:"endpoint"`
 }

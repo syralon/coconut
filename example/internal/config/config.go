@@ -18,14 +18,6 @@ type Config struct {
 	Connector ConnectorConfig `json:"connector" yaml:"connector"`
 }
 
-func Read(ctx context.Context) (*Config, error) {
-	c := new(Config)
-	if err := configuration.Read(ctx, c); err != nil {
-		return nil, err
-	}
-	return c, nil
-}
-
 type Database struct {
 	Driver string `json:"driver" yaml:"driver"`
 	Source string `json:"source" yaml:"source"`
@@ -34,4 +26,12 @@ type Database struct {
 type ConnectorConfig struct {
 	BookService      grpc.ServiceClientConfig[example.BookServiceClient]      `json:"book_service" yaml:"book_service"`
 	BookShelfService grpc.ServiceClientConfig[example.BookShelfServiceClient] `json:"book_shelf_service" yaml:"book_shelf_service"`
+}
+
+func Read(ctx context.Context) (*Config, error) {
+	c := new(Config)
+	if err := configuration.Read(ctx, c); err != nil {
+		return nil, err
+	}
+	return c, nil
 }
