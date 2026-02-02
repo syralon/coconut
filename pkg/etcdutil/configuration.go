@@ -21,7 +21,7 @@ func NewConfigDriver() configuration.Driver {
 	return &etcdConfigDriver{}
 }
 
-func (c *etcdConfigDriver) Build(_ context.Context, script string) (configuration.Reader, error) {
+func (c *etcdConfigDriver) Build(_ context.Context, script string) (configuration.ReadWatcher, error) {
 	var config *clientv3.Config
 	var err error
 	if strings.HasPrefix(script, "etcd://") {
