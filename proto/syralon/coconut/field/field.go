@@ -503,3 +503,7 @@ func NewTimestamp(t time.Time) *TimestampField {
 func NewDuration(d time.Duration) *DurationField {
 	return &DurationField{Operator: &DurationField_Eq{Eq: durationpb.New(d)}}
 }
+
+func NewBytes(b []byte) *BytesField {
+	return &BytesField{Operator: &BytesField_Eq{Eq: b}}
+}
